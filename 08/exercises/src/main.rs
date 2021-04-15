@@ -3,12 +3,12 @@ use std::io;
 
 fn main() {
     // Task 1
-    // let res = task_1(&vec![1, 3, 3, 7, 4, 2, 0]);
-    // println!("Task 1: {:?}", res);
+    let res = task_1(&vec![1, 3, 3, 7, 4, 2, 0]);
+    println!("Task 1: {:?}", res);
 
     // Task 2
-    // println!("Task 2 — 'first' -> {}", task2("first"));
-    // println!("Task 2 — 'apple' -> {}", task2("apple"));
+    println!("Task 2 — 'first' -> {}", task2("first"));
+    println!("Task 2 — 'apple' -> {}", task2("apple"));
 
     // Task 3
     task3();
