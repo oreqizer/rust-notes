@@ -1,5 +1,6 @@
 fn main() {
     macro_rules_vec();
+    derive_macro();
 }
 
 // Types:
@@ -42,4 +43,39 @@ fn macro_rules_vec() {
 }
 
 // Procedural macros 🙀
-// TODO
+// use proc_macro;
+
+// #[some_attribute]
+// pub fn some_name(input: TokenStream) -> TokenStream {
+//     // code
+// }
+
+// custom derive
+// TODO the derive crate should be macros_derive by convention
+// see docs https://doc.rust-lang.org/book/ch19-06-macros.html
+// TODO also document path dependencies
+use macros::HelloMacro;
+
+pub trait HelloMacro {
+    fn hello_macro();
+}
+
+#[derive(HelloMacro)]
+struct Pancakes;
+
+fn derive_macro() {
+    Pancakes::hello_macro();
+}
+
+// attribute-like
+// #[route(GET, "/")]
+// fn index() {
+
+// #[proc_macro_attribute]
+// pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
+
+// function-like
+// let sql = sql!(SELECT * FROM posts WHERE id=1);
+
+// #[proc_macro]
+// pub fn sql(input: TokenStream) -> TokenStream {
