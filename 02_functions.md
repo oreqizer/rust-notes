@@ -1,0 +1,50 @@
+# Functions
+
+Declared using `fn` and arguments, return type by `->`.
+
+```rust
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+```
+
+Functions can be used before they are declared:
+
+```rust
+fn add_two(x: i32) -> i32 {
+    add_one(add_one(x))
+}
+
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+```
+
+## Main
+
+Function `main` in `src/main.rs` is the application entrypoint.
+
+It returns either `()`:
+
+```rust
+// src/main.rs
+fn main() {
+    println!("kek");
+}
+```
+
+Or `Result<(), E>`:
+
+```rust
+use std::num::ParseIntError;
+
+fn main() -> Result<(), ParseIntError> {
+    let number_str = "10";
+    let number = match number_str.parse::<i32>() {
+        Ok(number)  => number,
+        Err(e) => return Err(e),
+    };
+    println!("{}", number);
+    Ok(())
+}
+```
