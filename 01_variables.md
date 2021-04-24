@@ -15,13 +15,19 @@ Every variable and reference is **immutable** by default.
 Variables declared using `let` or `let mut`:
 
 ```rs
-let x = 5;
+let x: i32 = 5;
 
-let mut y = 10;
+let mut y: i32 = 10;
 y = 12;
 ```
 
-Initialization can be deferred:
+Type can be inferred:
+
+```rs
+let x = -4; // i32
+```
+
+Initialization can be deferred, _type annotation_ is optional:
 
 ```rs
 let mut z;
@@ -29,7 +35,8 @@ let mut z;
 z = 6;
 ```
 
-Initializing the same variable multiple times _shadows_ the previous declaration:
+Initializing the same variable multiple times _shadows_ the previous declaration,
+types can differ:
 
 ```rs
 let x = 5;
@@ -41,6 +48,7 @@ let x = "kek";
 
 Static variables are declared using `static` in the global scope. They can be _mutable_,
 although mutable static variables is a bad practice because they're not thread safe.
+They must have a _type annotation_.
 
 Static variables have a static place in memory and can be passed around as references.
 
@@ -52,7 +60,7 @@ static mut PLAYERS: u32 = 0; // :(
 ## Constants
 
 Constants are declared using `const` and are values that are inlined during compilation.
-They can be declared in any scope. They must be an _annotated constant expression_.
+They can be declared in any scope. They must have a _type annotation_.
 
 Unless interior mutability or a static place in memory is required, constants are
 preferred over statics.
