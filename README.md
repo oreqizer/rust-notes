@@ -4,7 +4,7 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 ## TODO
 
-5. ownership + slices
+5. ownership + references + slices
 5. types (type aliases, structs, enums) + advanced types (minus sized)
 5. patterns
 6. modules & workspaces

@@ -52,3 +52,7 @@ Can also have CLI in `src/main.rs`.
 * `snake_case` for _functions_, _variables_, _macros_ and _lifetimes_
 * `PascalCase` for _enums_, _structs_, _generics_ and _traits_
 * `SCREAMING_SNAKE_CASE` for _constants_ and _statics_
+
+## Comments
+
+Comments are specified after `//`. No special multiline syntax.
