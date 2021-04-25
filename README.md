@@ -4,10 +4,10 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 ## TODO
 
-5. ownership + references + slices
-5. lifetimes
-5. types (type aliases, structs, enums) + advanced types (minus sized)
-5. patterns
+6. slices
+6. lifetimes
+6. types (type aliases, structs, enums) + advanced types (minus sized)
+6. patterns
 6. modules & workspaces
 7. vectors
 8. strings
