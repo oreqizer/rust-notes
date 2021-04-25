@@ -2,6 +2,13 @@ fn main() {
     // loop
     let mut counter = 0;
 
+    let x = {
+        let y = 5;
+        println!("y = {}", y);
+        y
+    };
+    println!("x = {}", x);
+
     let result = loop {
         counter += 1;
 

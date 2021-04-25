@@ -20,6 +20,20 @@ fn add_one(x: i32) -> i32 {
 }
 ```
 
+## Return
+
+Like in regular blocks, the last _expression_ in a function block is the _return value_:
+
+```rust
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+// the same as
+fn add_one(x: i32) -> i32 {
+    return x + 1;
+}
+```
+
 ## Main
 
 Function `main` in `src/main.rs` is the application entrypoint.
@@ -46,5 +60,23 @@ fn main() -> Result<(), ParseIntError> {
     };
     println!("{}", number);
     Ok(())
+}
+```
+
+## Pointers
+
+Functions can be passed around as _pointers_:
+
+```rust
+fn add_one(x: i32) -> i32 {
+    x + 1
+}
+
+fn do_twice(f: fn(i32) -> i32, arg: i32) -> i32 {
+    f(arg) + f(arg)
+}
+
+fn add_two(x: i32) -> i32 {
+    do_twice(add_one, x)
 }
 ```
