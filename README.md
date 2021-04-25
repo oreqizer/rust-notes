@@ -5,6 +5,7 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 ## TODO
 
 5. ownership + references + slices
+5. lifetimes
 5. types (type aliases, structs, enums) + advanced types (minus sized)
 5. patterns
 6. modules & workspaces
@@ -12,7 +13,6 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 8. strings
 9. hashmaps
 10. traits + newtype pattern + advanced traits + sized trait from advanced types + trait objects
-11. lifetymes
 12. tests + docs
 13. closures
 14. iterators
