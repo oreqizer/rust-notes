@@ -125,34 +125,18 @@ References must obey the following rules:
 - there can be only one _mutable_ reference
 - when a _mutable_ reference exists, no _immutable_ reference can exist
 
-Mutating primitive values is done by _dereferencing_ using the `*` operator:
+Mutating referenced values is done by _dereferencing_ using the `*` operator:
 
 ```rust
 let mut n = 10;
 to_five(&mut n); // n is now 5
 
 fn to_five(x: &mut i32) {
-    *x = 5; // changes the value at the reference location to 5
+    *x = 5; // changes the value where the reference points at to 5
 }
 ```
 
-References are valid until the end of their _scope_:
-
-```rust
-fn task() {
-    let number = 5;
-    let x = &number;
-    gimme_number(&x);
-    // x still valid
-    let y = x + 5;
-    gimme_number(&y);
-}   // scope ends, x no longer valid
-
-fn gimme_number(n: &i32) {  // number borrowed here
-    println!("Thanks, got {}", n);
-}                           // reference still valid
-```
-
+Same as variables, references are valid until the end of their _scope_.
 Immutable references are no longer valid after a _mutable borrow_:
 
 ```rust
