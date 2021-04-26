@@ -43,10 +43,10 @@ passing both raw values and more abstract data types:
 ```rust
 fn main() {
     let s = after_n(3, "lolkekbur");                 // &str string literal slice directly
-    let s = after_n(3, &String::from("lolkekbur"));  // deref-coerced &String -> &str
+    let s = after_n(3, &String::from("lolkekbur"));  // Deref-coerced &String -> &str
 
     let (x, y) = split_half(&[1, 2, 3, 4]);          // &[i32] array slice directly
-    let (x, y) = split_half(&vec![1, 2, 3, 4]);      // deref-coerced &Vec<T> -> &[i32]
+    let (x, y) = split_half(&vec![1, 2, 3, 4]);      // Deref-coerced &Vec<T> -> &[i32]
 }
 
 fn after_n(n: usize, s: &str) -> &str {
