@@ -15,33 +15,41 @@ Every variable and reference is **immutable** by default.
 Variables declared using `let` or `let mut`:
 
 ```rust
-let x: i32 = 5;
+fn main() {
+    let x: i32 = 5;
 
-let mut y: i32 = 10;
-y = 12;
+    let mut y: i32 = 10;
+    y = 12;
+}
 ```
 
 Type can be inferred:
 
 ```rust
-let x = -4; // i32
+fn main() {
+    let x = -4; // i32
+}
 ```
 
 Initialization can be deferred, _type annotation_ is optional:
 
 ```rust
-let mut z;
-// ...
-z = 6;
+fn main() {
+    let mut z;
+    // ...
+    z = 6;
+}
 ```
 
 Initializing the same variable multiple times _shadows_ the previous declaration,
 types can differ:
 
 ```rust
-let x = 5;
-// ...
-let x = "kek";
+fn main() {
+    let x = 5;
+    // ...
+    let x = "kek";
+}
 ```
 
 ### Statics

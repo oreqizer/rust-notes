@@ -17,10 +17,14 @@ Variable bindings have a _scope_, and are constrained to live in a _block_.
 Variables are valid as long as their scope is valid:
 
 ```rust
-{                      // s is not valid here, it’s not yet declared
-    let s = "hello";   // s is valid from this point forward
-    // ...
-}                      // this scope is now over, and s is no longer valid
+fn main() {
+    let w = "kek";
+    {                      // s is not valid here, it’s not yet declared
+        let s = "hello";   // s is valid from this point forward
+        // ...
+    }                      // this scope is now over, and s is no longer valid
+    // w valid, s invalid
+}
 ```
 
 ### Copying
@@ -29,11 +33,13 @@ When a primitive value is assigned to another variable or passed to a function,
 its value is _copied_. This copy has its own scope in the function:
 
 ```rust
-let n1 = 5;
-let n2 = n1; // n1 copied to n2, both valid
+fn main() {
+    let n1 = 5;
+    let n2 = n1; // n1 copied to n2, both valid
 
-gimme_string(n2);
-// both n1 and n2 valid
+    gimme_string(n2);
+    // both n1 and n2 valid
+}
 
 fn gimme_number(n: i32) {  // n copied, has the scope of the function
     println!("Got a number: {}", n);
@@ -68,11 +74,13 @@ _owner_. If the pointer is assigned to another variable or passed to a function,
 the pointer is _moved_ and gets a new owner:
 
 ```rust
-let s1 = String::from("hello");
-let s2 = s1; // s1 moved to s2, s1 is no longer valid
+fn main() {
+    let s1 = String::from("hello");
+    let s2 = s1; // s1 moved to s2, s1 is no longer valid
 
-gimme_string(s2);
-// cannot use s2 anymore :(
+    gimme_string(s2);
+    // cannot use s2 anymore :(
+}
 
 fn gimme_string(s: String) {  // s moved, now owned by the function
     println!("Now I own: {}", s);
@@ -82,7 +90,9 @@ fn gimme_string(s: String) {  // s moved, now owned by the function
 When returning fat pointers from functions, their ownership is moved:
 
 ```rust
-let s = make_string(); // s owns the return value of make_string()
+fn main() {
+    let s = make_string(); // s owns the return value of make_string()
+}
 
 fn make_string() -> String {
     String::from("lmao")
@@ -95,30 +105,33 @@ Reference to a value is taken by the `&` operator. This creates a _thin pointer_
 to the data. Taking a reference to a value is called _borrowing_.
 
 ```rust
-let s = String::from("kek");
-println!("Length is {}", string_length(&s));
+fn main() {
+    let s = String::from("kek");
+    println!("Length is {}", string_length(&s));
+}
 
 fn string_length(s: &String) -> usize {
     s.len()
 }
 ```
 
-References are _immutable_ by default. Use `&mut` to make them _mutable_:
+Reference to a fat pointer to a value stored on the heap:
+
+![Reference to a fat pointer](./assets/string_ptr_ref.svg)
+
+References are _immutable_ by default. Only mutable variables can be borrowed as mutable.
+Use `&mut` to make a reference _mutable_:
 
 ```rust
-let mut s = String::from("top");
-append_kek(&mut s); // s is now topkek
+fn main() {
+    let mut s = String::from("top");
+    append_kek(&mut s); // s is now topkek
+}
 
 fn append_kek(s: &mut String) {
     s.push_str("kek");
 }
 ```
-
-Note that only mutable variables can be borrowed as mutable.
-
-Reference to a fat pointer to a value stored on the heap:
-
-![Reference to a fat pointer](./assets/string_ptr_ref.svg)
 
 References must obey the following rules:
 - there can be any number of _immutable_ references
@@ -128,8 +141,10 @@ References must obey the following rules:
 Mutating referenced values is done by _dereferencing_ using the `*` operator:
 
 ```rust
-let mut n = 10;
-to_five(&mut n); // n is now 5
+fn main() {
+    let mut n = 10;
+    to_five(&mut n); // n is now 5
+}
 
 fn to_five(x: &mut i32) {
     *x = 5; // changes the value where the reference points at to 5
@@ -140,13 +155,15 @@ Same as variables, references are valid until the end of their _scope_.
 Immutable references are no longer valid after a _mutable borrow_:
 
 ```rust
-let number = 5;
-let x = &number;     // valid
-let y = &number;     // valid
-println!("Numbers: {}, {}", x, y);
+fn main() {
+    let mut number = 5;
+    let x = &number;     // valid
+    let y = &number;     // valid
+    println!("Numbers: {}, {}", x, y);
 
-let z = &mut number; // x and y no longer valid!
-println!("Number: {}", z);
+    let z = &mut number; // x and y no longer valid!
+    println!("Number: {}", z);
+}
 ```
 
 References whose values were created inside a function cannot be returned

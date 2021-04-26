@@ -8,12 +8,14 @@ Blocks create their own _scope_. They are an _expression_ with the value of
 the last expression in the block:
 
 ```rust
-let x = {
-    let y = 5;
-    println!("y = {}", y);
-    y
-};
-println!("x = {}", x);
+fn main() {
+    let x = {
+        let y = 5;
+        println!("y = {}", y);
+        y
+    };
+    println!("x = {}", x);
+}
 ```
 
 Note that the last expression cannot be followed by `;` or it would be considered
@@ -24,7 +26,9 @@ a _statement_ instead.
 Works like in most languages, except is an _expression_:
 
 ```rust
-let ternary = if x < 5 { "small" } else { "big" };
+fn main() {
+    let ternary = if x < 5 { "small" } else { "big" };
+}
 
 fn rng(x: i32) -> i32 {
     if x < 5 {
@@ -43,9 +47,11 @@ A switch-like expression that matches patterns and values. Must be _exhaustive_ 
 all possible patterns and values must be matched at least in one arm:
 
 ```rust
-let text = match val {
-    5 => "five",
-    x => "some other number",
+fn main() {
+    let text = match val {
+        5 => "five",
+        x => "some other number",
+    };
 }
 ```
 
@@ -54,8 +60,10 @@ let text = match val {
 Syntax sugar for `match` that matches one pattern does nothing with the rest:
 
 ```rust
-if let Some(x) = val {
-    println!("x = {}", x);
+fn main() {
+    if let Some(x) = val {
+        println!("x = {}", x);
+    }
 }
 ```
 
@@ -67,14 +75,16 @@ Loops forever. The `break` statement can be called with a value to return a valu
 from the `loop`.
 
 ```rust
-let mut counter = 0;
-let result = loop {
-    counter += 1;
+fn main() {
+    let mut counter = 0;
+    let result = loop {
+        counter += 1;
 
-    if counter == 10 {
-        break counter * 2;
-    }
-};
+        if counter == 10 {
+            break counter * 2;
+        }
+    };
+}
 ```
 
 ## For
@@ -82,8 +92,10 @@ let result = loop {
 Looping through iterables is done with a `for` statement:
 
 ```rust
-for number in 1..4 {
-    println!("{}", number);
+fn main() {
+    for number in 1..4 {
+        println!("{}", number);
+    }
 }
 ```
 
@@ -92,11 +104,13 @@ for number in 1..4 {
 Runs `while` the condition evaluates to `true`:
 
 ```rust
-let a = [10, 20, 30, 40, 50];
-let mut index = 0;
+fn main() {
+    let a = [10, 20, 30, 40, 50];
+    let mut index = 0;
 
-while index < 5 {
-    println!("the value is: {}", a[index]);
-    index += 1;
+    while index < 5 {
+        println!("the value is: {}", a[index]);
+        index += 1;
+    }
 }
 ```

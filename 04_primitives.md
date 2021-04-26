@@ -16,14 +16,18 @@ Rust has a wide variety of primitive values.
 A fixed-size collection of values:
 
 ```rust
-let vector = (1, 3, 3.7);
-let single = (420,); // trailing comma needed for single element tuples
+fn main() {
+    let vector = (1, 3, 3.7);
+    let single = (420,); // trailing comma needed for single element tuples
+}
 ```
 
 Types can differ:
 
 ```rust
-let mishmash = (420, "blazeit");
+fn main() {
+    let mishmash = (420, "blazeit");
+}
 ```
 
 They're indexed with `.` and a number, e.g. `.0` for the first element. 
@@ -41,11 +45,15 @@ A collection of objects of the same type. Their length is known at _compile time
 Their signature is `[T; length]`.
 
 ```rust
-let xs = [1, 2, 3, 4, 5]; // type [i32; 5]
+fn main() {
+    let xs = [1, 2, 3, 4, 5]; // type [i32; 5]
+}
 ```
 
 Creating an array with certain length and a default value:
 
 ```rust
-let xs = [0; 500]; // type [i32, 500]
+fn main() {
+    let xs = [0; 500]; // type [i32, 500]
+}
 ```
