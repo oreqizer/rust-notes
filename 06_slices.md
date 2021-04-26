@@ -43,18 +43,36 @@ passing both raw values and more abstract data types:
 ```rust
 fn main() {
     let s = after_n(3, "lolkekbur");                 // &str string literal slice directly
-    let s = after_n(3, &String::from("lolkekbur"));  // auto-derefernced &String -> &str
+    let s = after_n(3, &String::from("lolkekbur"));  // deref-coerced &String -> &str
 
     let (x, y) = split_half(&[1, 2, 3, 4]);          // &[i32] array slice directly
-    let (x, y) = split_half(&vec![1, 2, 3, 4]);      // auto-derefernced &Vec<T> -> &[i32]
+    let (x, y) = split_half(&vec![1, 2, 3, 4]);      // deref-coerced &Vec<T> -> &[i32]
 }
 
-fn after_n(n: u32, s: &str) -> &str {
+fn after_n(n: usize, s: &str) -> &str {
     &s[n..]
 }
 
 fn split_half(a: &[i32]) -> (&[i32], &[i32]) {
     let len = a.len() / 2;
     (&a[..len], &a[len..])
+}
+```
+
+This "magic" is a compiler feature called `Deref` coercion that automatically
+dereferences types implementing the `Deref` trait if the supplied type to
+a function call doesn't match the expected type:
+
+```rust
+fn main() {
+    let word = String::from("lolkekbur");
+    
+    let s = after_n(3, &word[..]);  // is the explicit form
+    let s = after_n(3, &word);      // turns into &word[..]
+    let s = after_n(3, &&&word);    // turns into *&*&&word[..]
+}
+
+fn after_n(n: usize, s: &str) -> &str {
+    &s[n..]
 }
 ```
