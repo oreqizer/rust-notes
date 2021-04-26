@@ -2,6 +2,7 @@
 <module type="WEB_MODULE" version="4">
   <component name="NewModuleRootManager">
     <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/.tmp/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/01_hello_cargo/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/03_functions/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/04_branches/src" isTestSource="false" />
@@ -39,6 +40,8 @@
       <excludeFolder url="file://$MODULE_DIR$/27_macros/target" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/guessing_game/target" />
       <excludeFolder url="file://$MODULE_DIR$/exercises/minigrep/target" />
+      <excludeFolder url="file://$MODULE_DIR$/.tmp/playground/target" />
+      <excludeFolder url="file://$MODULE_DIR$/.tmp/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
