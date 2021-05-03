@@ -12,6 +12,9 @@ struct User {
 
 // Tuple struct
 struct Point(i32, i32, i32);
+
+// Unit struct
+struct Empty;
 ```
 
 ## Instances

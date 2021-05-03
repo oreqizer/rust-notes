@@ -49,8 +49,9 @@ all possible patterns and values must be matched at least in one arm:
 ```rust
 fn main() {
     let text = match val {
-        5 => "five",
-        x => "some other number",
+        Some(5) => "five",
+        Some(x) => "some other number",
+        None => "nothing",
     };
 }
 ```

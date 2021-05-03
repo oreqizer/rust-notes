@@ -4,10 +4,9 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 ## TODO
 
-7. structs
 6. enums
 10. traits + newtype pattern + advanced traits + sized trait from advanced types + trait objects
-6. types (type aliases, newtype) + advanced types (minus sized)
+6. types (type aliases, newtype), generics (and trait bounds) + advanced types (minus sized)
 6. lifetimes
 6. patterns
 6. modules & workspaces
