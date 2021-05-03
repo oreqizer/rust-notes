@@ -34,7 +34,29 @@ fn main() {
 }
 ```
 
-## Arguments
+## Collections
+
+More complex collections such as `Vec<T>` or `String` use primitive collections
+such as arrays and `str` data under the hood. They mainly serve as an abstraction
+for data manipulation using methods such as `Vec::push` or `String::push_str`.
+
+### Dereferencing
+
+Data types that use primitive collections under the hood implement the `Deref` trait
+so that they return a slice of the underlying data when sliced:
+
+```rust
+fn main() {
+    let a = [1, 2, 3, 4];
+    let v = vec![1, 2, 3, 4];
+
+    let s1 = &a[..]; // &[i32]
+    let s2 = &v[..]; // &[i32]
+    // s1 == s2
+}
+```
+
+### Arguments
 
 When a funciton does an _immutable borrow_ of a collection, the best practice is to
 use slices as arguments instead of a specific collection implementation. This allows
@@ -76,3 +98,4 @@ fn after_n(n: usize, s: &str) -> &str {
     &s[n..]
 }
 ```
+
