@@ -1,0 +1,121 @@
+# Structs
+
+Structs hold related data of different types together and have a name:
+
+```rust
+// Named fields struct
+struct User {
+    username: String,
+    email: String,
+    credits: u64,
+}
+
+// Tuple struct
+struct Point(i32, i32, i32);
+```
+
+## Instances
+
+Because Rust has no zero or nullish values, structs need to be instantiated
+with all their fields filled:
+
+```rust
+fn main() {
+    let user1 = User {
+        username: String::from("xxx_BILLY_xxx"),
+        email: String::from("blaze@michael.it"),
+        credits: 0,
+    };
+}
+```
+
+A structure needs to be marked as `mut` to allow updating values:
+
+```rust
+fn main() {
+    let mut user1 = User {
+        username: String::from("xxx_BILLY_xxx"),
+        email: String::from("blaze@michael.it"),
+        credits: 0,
+    };
+    
+    user1.email = String::from("crash@team.racing");
+}
+```
+
+Creating new structures from existing ones can be done using destructuring
+with the `..` syntax:
+
+```rust
+fn main() {
+    // ...
+    
+    let user2 = User {
+        username: String::from("_____samo_____"),
+        ..user1
+    };
+}
+```
+
+## Methods
+
+Methods on structs are defined using the `impl` block and can reference themselves
+using `self` as the first parameter:
+
+```rust
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+}
+```
+
+Ownership rules apply for the `self` parameter, so it can be specified as an immutable
+reference `&self` (most common), mutable reference `&mut self` or take the ownership
+of the value when specified as `self`.
+
+### Automatic ref/deref
+
+Rust's _automatic referencing and dereferencing_ feature allows uniform syntax when calling
+methods on types regardless of the type of `self` and the value. It adds `&`, `&mut` or `*`
+on the value before the method call as needed:
+
+```rust
+struct Point(i32, i32, i32);
+
+impl Point {
+    fn det(&self, other: &Point) -> i32 {
+        self.0 * other.0 + self.1 * other.1 + self.2 * other.2
+    }
+}
+
+fn main() {
+    let p1 = Point(13, 37, 7);
+    let p2 = Point(4, 2, 0);
+
+    p1.det(&p2);
+    // turns into
+    (&p1).det(&p2);
+}
+```
+
+### Fully qualified syntax
+
+Methods can be called using the _fully qualified syntax_, which also allows the method
+to be used as a _function pointer_:
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    
+    v.push(4);
+    // same as
+    Vec::push(&mut v, 4);
+}
+```
+
