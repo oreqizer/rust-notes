@@ -117,10 +117,6 @@ these rules:
 - the return type is not `Self`
 - there are no generic type parameters
 
-Since the size of the objects returned is not known at compile time, these objects
-have to be wrapped in a `Box<T>`, which is a _DST_ that places the object on the heap
-and holds the value's pointer and its size.
-
 ```rust
 trait Draw {
     fn draw(&self);
@@ -203,6 +199,33 @@ type, they only satisfy the `Fn` family of traits:
 ```rust
 fn returns_closure() -> impl Fn(i32) -> i32 {
     |x| x + 1
+}
+```
+
+## Supertraits
+
+Traits can require implementors to also implement other traits, becoming their 
+_supertraits_:
+
+```rust
+trait Mlg: Display {
+    fn mlg(&self) -> String {
+        format!("xxx_{}_xxx", self)
+    }
+}
+```
+
+Multiple trait implementations can be required by joining traits with `+`:
+
+```rust
+trait Mlg: Display + PartialOrd {
+    fn winner(&self, other: &Self) -> String {
+        if self > other {
+            format!("xxx_{}_xxx", self)
+        } else {
+            format!("blazeit_{}", other)
+        }
+    }
 }
 ```
 
