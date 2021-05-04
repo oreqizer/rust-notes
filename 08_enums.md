@@ -4,8 +4,8 @@ Enums define a type by enumerating its possible _variants_:
 
 ```rust
 enum IpAddr {
-    V4(String),
-    V6(String),
+    V4,
+    V6,
 }
 ```
 

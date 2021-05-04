@@ -4,21 +4,20 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 ## TODO
 
-6. enums
-10. traits + newtype pattern + advanced traits + sized trait from advanced types + trait objects
-6. types (type aliases, newtype), generics (and trait bounds) + advanced types (minus sized)
-6. lifetimes
-6. patterns
-6. modules & workspaces
-12. tests + docs
-7. vectors
-8. strings
-9. hashmaps
-13. closures
-14. iterators
-15. boxes
-16. rcs
-17. refcells
-18. threads
-19. unsafe
-20. macros
+10. traits + advanced traits + trait objects
+11. types, type aliases, newtype pattern, never type, DSTs
+12. lifetimes
+13. patterns
+14. modules & workspaces
+15. tests + docs
+16. vectors
+17. strings
+18. hashmaps
+19. closures
+20. iterators
+21. boxes
+22. rcs
+23. refcells
+24. threads
+25. unsafe
+26. macros

@@ -21,6 +21,7 @@ Overview of Rust's main constructs and conventions.
 * **traits** define behavior that types have like `ToString`
 * **closures** are anonymous functions that capture their context, `|x| x * 2`
 * **generics** allow parameters of different types `Vec<T>`
+* **DSTs** hold types with size not known at compile time, `Box<dyn Trait>`
 * declarative and procedural **macros** for metaprogramming, `println!("a macro")`
   or `#[derive(Debug)]`
 

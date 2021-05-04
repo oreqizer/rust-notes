@@ -82,6 +82,29 @@ Ownership rules apply for the `self` parameter, so it can be specified as an imm
 reference `&self` (most common), mutable reference `&mut self` or take the ownership
 of the value when specified as `self`.
 
+### Self
+
+A special type `Self` is available in method definition that refers to the type the method
+is defined on:
+
+```rust
+struct Rectangle {
+    x: i32,
+    y: i32,
+}
+
+impl Rectangle {
+    fn square(side: i32) -> Self {
+        Self { x: side, y: side };
+    }
+}
+```
+
+The `self` parameter notation is just a syntax sugar. The explicit forms look like this:
+- `self` is `self: Self`
+- `&self` is `self: &Self`
+- `&mut self` is `self: &mut Self`
+
 ### Automatic ref/deref
 
 Rust's _automatic referencing and dereferencing_ feature allows uniform syntax when calling
@@ -107,10 +130,31 @@ fn main() {
 }
 ```
 
-### Fully qualified syntax
+## Associated functions
 
-Methods can be called using the _fully qualified syntax_, which also allows the method
-to be used as a _function pointer_:
+Associated funcitons are defined in an `impl` block and don't use the `self` parameter.
+They are accessed on the structure name using `::`:
+
+```rust
+struct Point(i32, i32);
+
+impl Point {
+    fn new() -> Self {
+        Point(0, 0)
+    }
+}
+
+fn main() {
+    let p = Point::new();
+}
+```
+
+## Fully qualified syntax
+
+The _fully qualified syntax_ for function calls of a type is:
+- `Type::function(receiver_if_method, args..)`
+
+Methods called with the full syntax allows the method to be used as a _function pointer_:
 
 ```rust
 fn main() {
@@ -121,4 +165,3 @@ fn main() {
     Vec::push(&mut v, 4);
 }
 ```
-
