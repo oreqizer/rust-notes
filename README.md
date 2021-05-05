@@ -4,7 +4,6 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 ## TODO
 
-10. traits + advanced traits + trait objects
 11. types, type aliases, newtype pattern, never type, DSTs
 12. lifetimes
 13. closures

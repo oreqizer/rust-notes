@@ -52,7 +52,7 @@ fn main() {
 }
 ```
 
-### Statics
+## Statics
 
 Static variables are declared using `static` in the global scope. They can be _mutable_,
 although mutable static variables is a bad practice because they're not thread safe.
@@ -65,7 +65,7 @@ static NICKNAME: &str = "henchbruv";
 static mut PLAYERS: u32 = 0; // :(
 ```
 
-### Constants
+## Constants
 
 Constants are declared using `const` and are values that are inlined during compilation.
 They can be declared in any scope. They must have a _type annotation_.

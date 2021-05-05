@@ -17,7 +17,7 @@ Overview of Rust's main constructs and conventions.
 * **tuples** are collections of values of different types, `(i32, i32, &str)`
 * **structs** hold related data and define related **methods**, `vector.normalize()`
 * **references** allow _borrowing_ data, `&value`
-* **lifetimes** ensure data validity, `'a`
+* **lifetimes** ensure data validity like `'static`,`'a`
 * **traits** define behavior that types have like `ToString`
 * **closures** are anonymous functions that capture their context, `|x| x * 2`
 * **generics** allow parameters of different types `Vec<T>`
