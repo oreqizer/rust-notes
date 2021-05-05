@@ -6,7 +6,7 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 11. types, type aliases, newtype pattern, never type, DSTs
 12. lifetimes
-13. closures
+13. closures, move
 14. patterns
 15. modules & workspaces
 16. tests + docs

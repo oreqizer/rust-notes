@@ -5,6 +5,10 @@ Traits give types _behaviour_ via methods they implement, such as:
 * `PartialOrd` makes types comparable
 * `Display` enables automatic formatting
 
+> The **orphan rule** states that either the _trait_, or the _implementor_
+> have to be internal types. _External traits_ cannot be implemented on
+> _external types_.
+
 They are defined using the `trait` keyword, and a list of methods a type
 should implement:
 
