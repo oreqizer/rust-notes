@@ -99,4 +99,25 @@ a lot easier.
 
 ## Never
 
+The `!` stands for the _never_ type for functions that never return, meaning
+they either loop forever or exit the program:
+
+```rust
+fn loophole() -> ! {
+    loop {
+        println!("RIP ☠️");
+    }
+}
+
+fn int_or_bye(o: Option<i32>) -> i32 {
+    // Formally, the ! type can be coerced into any other type
+    match o {
+        Some(x) => x,
+        None => loophole(),
+    }
+}
+```
+
+One of the main functions that exit the program is the `panic!` macro.
+
 ## DSTs
