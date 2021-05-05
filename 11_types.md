@@ -118,6 +118,53 @@ fn int_or_bye(o: Option<i32>) -> i32 {
 }
 ```
 
-One of the main functions that exit the program is the `panic!` macro.
+One of the main functions that exit the program is the `panic!` macro:
+
+```rust
+fn int_or_bye(o: Option<i32>) -> i32 {
+    match o {
+        Some(x) => x,
+        None => panic!("bye 👋"),
+    }
+}
+```
 
 ## DSTs
+
+_Dynamically sized types_ are types whose size is not known at compile time.
+The two major DSTs exposed by the language are:
+- trait objects `dyn Trait`
+- references like `[T]` and `str`
+
+DSTs **must** exist behind a fat pointer, which contains information that
+_complete_ the pointer with necessary information, like the _vtable_ of a
+trait object, or a slice's size.
+
+By default, generic parameters implicitly have the `Sized` trait bound which
+only allows statically sized types:
+
+```rust
+// fn sized<T>(a: T) {
+// turns into:
+fn sized<T: Sized>(a: T) {
+    // ...
+}
+```
+
+Allowing DSTs is possible with specifying the `?Sized` trait bound, but only
+a reference to this type can be passed:
+
+```rust
+fn sized<T: Display>(a: &T) {
+    println!("sized {}", a);
+}
+
+fn nonsized<T: ?Sized + Display>(a: &T) {
+    println!("nonsized {}", a);
+}
+
+fn main() {
+    nonsized("kek");  // ok
+    // sized("kek");  // nope!
+}
+```
