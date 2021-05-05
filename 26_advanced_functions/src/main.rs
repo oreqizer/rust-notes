@@ -15,6 +15,7 @@ fn enum_initializer() {
 }
 
 // TODO add this to closures
+// and mention that impl Fn works instead!
 fn returns_closure() -> Box<dyn Fn(i32) -> i32> {
     // Box needed because it implements the Sized trait
     // and that is needed for function arguments/return values

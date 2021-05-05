@@ -154,8 +154,6 @@ fn main() {
 The _fully qualified syntax_ for function calls of a type is:
 - `Type::function(receiver_if_method, args..)`
 
-Methods called with the full syntax allows the method to be used as a _function pointer_:
-
 ```rust
 fn main() {
     let mut v = vec![1, 2, 3];
@@ -165,3 +163,5 @@ fn main() {
     Vec::push(&mut v, 4);
 }
 ```
+
+Methods called with the full syntax allows the method to be used as a _function pointer_.

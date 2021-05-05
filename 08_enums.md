@@ -20,6 +20,20 @@ enum Message {
 }
 ```
 
+Variant constructors can be passed around as _function pointers_, since they are
+functions that return their instance:
+
+```rust
+enum MaybeNum {
+    None,
+    Num(i32),
+}
+
+fn main() {
+    let v: Vec<MaybeNum> = (1..=4).map(MaybeNum::Num).collect();
+}
+```
+
 ## Built-ins
 
 The most widely used enums are `Option<T>` and `Result<T, E>`.

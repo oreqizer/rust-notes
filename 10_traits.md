@@ -105,6 +105,55 @@ where
 }
 ```
 
+### Method implementation
+
+Trait bounds can be used for conditionally implementing methods on generic types in case
+the concrete type satisfies the bounds:
+
+```rust
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+impl<T: Display + PartialOrd> Pair<T> {
+    fn cmp_display(&self) {
+        if self.x >= self.y {
+            println!("The largest member is x = {}", self.x);
+        } else {
+            println!("The largest member is y = {}", self.y);
+        }
+    }
+}
+```
+
+Methods can also be conditionally implemented for concrete types:
+
+```rust
+struct Pair<T> {
+    x: T,
+    y: T,
+}
+
+impl<T> Pair<T> {
+    fn new(x: T, y: T) -> Self {
+        Self { x, y }
+    }
+}
+
+impl Pair<i32> {
+    fn sum(&self) -> i32 {
+        self.x + self.y
+    }
+}
+```
+
 ## Trait objects
 
 The `dyn Trait` syntax allows specifying _trait objects_ — dynamic objects that implement
@@ -229,69 +278,73 @@ trait Mlg: Display + PartialOrd {
 }
 ```
 
-## Associated type
-
-Associated types are a type of _generics_. Their purpose is to simplify
-code management.
-
-> Code using the associated type can be replaced with code using the
-> generic type, but not the other way around.
-
-Associated type is specified using `type` in the `impl` block and can be
-accessed with `::`:
-
-```rust
-trait Graph {
-    type N;
-    type E;
-    fn has_edge(&self, start: &N, end: &N) -> bool;
-}
-
-fn distance<G: Graph>(graph: &G, start: &G::N, end: &G::N) -> uint {
-    // ...
-}
-```
-
-The same defined using generics is a lot less readable:
-
-```rust
-trait Graph<N, E> {
-    fn has_edge(&self, start: &N, end: &N) -> bool;
-}
-
-fn distance<N, E, G: Graph<N, E>>(graph: &G, start: &N, end: &N) -> uint {
-    // ...
-}
-```
-
-Associated types can be defaulted, allowing both flexibility and clean syntax:
-
-```rust
-trait Add<Rhs=Self> {
-    type Output = Rhs;
-    fn add(&self, rhs: Rhs) -> Self::Output;
-}
-
-struct Meters(u32);
-struct Millimeters(u32);
-
-impl Add for Meters {
-    type Output = Meters;
-
-    fn add(self, rhs: Meters) -> Meters {
-        Meters(self.0 + rhs.0)
-    }
-}
-
-impl Add<Meters> for Millimeters {
-    type Output = Millimeters;
-
-    fn add(self, rhs: Meters) -> Millimeters {
-        Millimeters(self.0 + (rhs.0 * 1000))
-    }
-}
-```
-
 ## Fully qualified syntax
 
-_TODO_
+The _fully qualified syntax_ for function calls in the context of traits is:
+- `Trait::function(receiver, args..)` for methods
+- `<Type as Trait>::function(args..)` for associated functions
+
+A struct can implement a method that collides with the name of an implemented
+trait's method. Calling an associated function on the _trait_ with the struct
+as the _receiver_ calls the trait implementation:
+
+```rust
+trait Pilot {
+    fn fly(&self);
+}
+
+struct Human;
+
+impl Human {
+    fn fly(&self) {
+        println!("*waving arms furiously*");
+    }
+}
+
+impl Pilot for Human {
+    fn fly(&self) {
+        println!("This is your captain speaking.");
+    }
+}
+
+fn main() {
+    let h = Human;
+    Pilot::fly(&h);  // This is your captain speaking.
+    h.fly();         // *waving arms furiously*
+}
+```
+
+The full form would be `<Human as Pilot>::fly(&h);`, but since Rust knows that
+`&h` is of type `&Human`, it knows which implementation of the `Pilot` trait
+to call.
+
+When a struct's and a trait's associated function names collide, the struct
+has to be cast to the trait using `as` to call the trait's implementation:
+
+```rust
+trait Animal {
+    fn baby_name() -> String;
+}
+
+struct Dog;
+
+impl Dog {
+    fn baby_name() -> String {
+        String::from("Spot")
+    }
+}
+
+impl Animal for Dog {
+    fn baby_name() -> String {
+        String::from("puppy")
+    }
+}
+
+fn main() {
+    println!("{}", Dog::baby_name());              // Spot
+    println!("{}", <Dog as Animal>::baby_name());  // puppy
+}
+```
+
+The short form `Animal::baby_name()` cannot be called, because Rust cannot
+infer the concrete implementation.
