@@ -4,7 +4,6 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 ## TODO
 
-11. types, type aliases, newtype pattern, never type, DSTs
 12. effects — nulls, panic and errors, ? operator
 12. lifetimes
 13. closures, move
@@ -21,3 +20,5 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 24. threads
 25. unsafe
 26. macros
+
+n1. ...rustonomicon chapters
