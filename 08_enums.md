@@ -34,28 +34,6 @@ fn main() {
 }
 ```
 
-## Built-ins
-
-The most widely used enums are `Option<T>` and `Result<T, E>`.
-
-_Option_ is for optional values:
-
-```rust
-enum Option<T> {
-    Some(T),
-    None,
-}
-```
-
-_Result_ is for operations that can fail and contains either a _value_ or an _error_:
-
-```rust
-enum Result<T, E> {
-    Ok(T),
-    Err(E),
-}
-```
-
 ## Methods
 
 Enums can define methods whose `self` parameter has the type of the enum:

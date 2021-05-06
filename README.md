@@ -4,21 +4,20 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 ## TODO
 
-12. effects — nulls, panic and errors, ? operator
-12. lifetimes
-13. closures, move
-14. patterns
-15. modules & workspaces
-16. tests + docs
-17. vectors
-18. strings
-19. hashmaps
-20. iterators
-21. boxes
-22. rcs
-23. refcells
-24. threads
-25. unsafe
-26. macros
+13. lifetimes
+14. closures, move
+15. patterns
+16. modules & workspaces
+17. tests + docs
+18. vectors
+19. strings
+20. hashmaps
+21. iterators
+22. boxes
+23. rcs
+24. refcells
+25. threads
+26. unsafe
+27. macros
 
 n1. ...rustonomicon chapters
