@@ -12,7 +12,7 @@ Overview of Rust's main constructs and conventions.
 
 ### Constructs
 
-* **primitives** like `i32`, `f64`
+* **primitives** like `i32`, `f64`, `bool`
 * **arrays** are fixed-size collections of values of the same type, `[i32; 100]`
 * **tuples** are collections of values of different types, `(i32, i32, &str)`
 * **references** allow _borrowing_ data, `&value`
