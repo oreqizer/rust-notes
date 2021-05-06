@@ -84,8 +84,8 @@ ends with `None` or `Err(E)`, it is returned from with this value.
 
 ## Panic
 
-The `panic!` macro is used for _unrecoverable errors_. It prints an error
-message on the screen, the stack trace and terminates the current thread:
+The `panic!` macro is used for _unrecoverable errors_. It and terminates the
+current thread with an error message:
 
 ```rust
 fn main() {
@@ -99,4 +99,40 @@ fn main() {
 }
 ```
 
-A `panic!` called in the main thread exits the program with an error code.
+A `panic!` called in the main thread terminates all other threads and exits
+the program with an error code `101`.
+
+### Unwrap
+
+Calling the `.unwrap()` method on `Option` or `Result` values unwraps the
+underlying value if it is `Some(T)` or `Ok(T)`, and calls `panic!` otherwise:
+
+```rust
+fn main() {
+    let mut f = File::open("dataset.txt").unwrap();  // boom 💥 or file 🗂
+    // ...
+}
+```
+
+Variants:
+* `.unwrap_or(T)` returns the supplied default if `None` or `Err(E)`
+* `.unwrap_or_default()` returns the type's default value if `None` or `Err(E)`
+* `.unwrap_or_else(Fn(E) -> T)` calls the closure if `None` or `Err(E)`
+* `.unwrap_err()` panics with the value if value is `Some(T)` or `Ok(T)`
+
+Useful when the programmer knows more than the compiler, and is sure that
+the code at hand will never fail.
+
+### Expect
+
+The same as `.unwrap()`, but with a meaningful error message:
+
+```rust
+fn main() {
+    let mut f = File::open("dataset.txt").expect("oops");  // boom 💥 or file 🗂
+    // ...
+}
+```
+
+Variants:
+* `.expect_err()` panics with the value if value is `Some(T)` or `Ok(T)`
