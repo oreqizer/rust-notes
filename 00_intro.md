@@ -13,16 +13,18 @@ Overview of Rust's main constructs and conventions.
 ### Constructs
 
 * **primitives** like `i32`, `f64`
-* fixed-size **arrays** have values of the same type, `[i32; 100]`
+* **arrays** are fixed-size collections of values of the same type, `[i32; 100]`
 * **tuples** are collections of values of different types, `(i32, i32, &str)`
-* **structs** hold related data and define related **methods**, `vector.normalize()`
 * **references** allow _borrowing_ data, `&value`
-* **lifetimes** ensure data validity like `'static`,`'a`
-* **traits** define behavior that types have like `ToString`
-* **closures** are anonymous functions that capture their context, `|x| x * 2`
+* **slices** offer referencing data sequences with a variable size, `[T]`, `str`
+* **structs** hold related data and define related **methods**, `vector.normalize()`
+* **enums** define _variants_ of types, `Result<T, E>` and its `Ok(T)`, `Err(E)`
 * **generics** allow parameters of different types `Vec<T>`
-* **DSTs** hold types with size not known at compile time, `Box<dyn Trait>`
-* declarative and procedural **macros** for metaprogramming, `println!("a macro")`
+* **traits** define behavior that types have like `ToString`
+* **DSTs** are types with size not known at compile time, `dyn Trait`, `[T]`, `str`
+* **lifetimes** ensure data validity like `'static`,`'a`
+* **closures** are anonymous functions that capture their context, `|x| x * 2`
+* **macros** for metaprogramming, declarative and procedural, `println!("a macro")`
   or `#[derive(Debug)]`
 
 ### Comments
