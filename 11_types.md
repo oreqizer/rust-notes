@@ -168,3 +168,16 @@ fn main() {
     // sized("kek");  // nope!
 }
 ```
+
+A convention is to write the `?Sized` trait bound next to the generic type
+definition even when using the `where` syntax:
+
+```rust
+fn some_function<T: ?Sized, U>(t: &T, u: &U)
+where
+    T: Display + Clone,
+    U: PartialOrd + Debug,
+{
+    // ...
+}
+```
