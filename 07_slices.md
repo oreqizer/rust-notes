@@ -81,9 +81,7 @@ fn split_half(a: &[i32]) -> (&[i32], &[i32]) {
 }
 ```
 
-This "magic" is a compiler feature called `Deref` coercion that automatically
-dereferences types implementing the `Deref` trait if the supplied type to
-a function call doesn't match the expected type:
+`Deref` coercion _slices_ collections that wrap slices:
 
 ```rust
 fn main() {

@@ -4,20 +4,20 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 ## TODO
 
-13. lifetimes
-14. closures, move
-15. patterns
-16. modules & workspaces
-17. tests + docs
-18. vectors
-19. strings
-20. hashmaps
-21. iterators
-22. boxes
-23. rcs
-24. refcells
-25. threads
-26. unsafe
-27. macros
+14. lifetimes
+15. closures, move
+16. patterns
+17. modules & workspaces
+18. tests + docs
+19. vectors
+20. strings
+21. hashmaps
+22. iterators
+23. boxes
+24. rcs
+25. refcells
+26. threads
+27. unsafe
+28. macros
 
 n1. ...rustonomicon chapters
