@@ -1,6 +1,8 @@
 # Rust
 
-Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/stable/book/).
+Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/stable/book/). 🦀
+
+Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapters. 🙀
 
 ## TODO
 
@@ -19,5 +21,3 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 26. threads
 27. unsafe
 28. macros
-
-n1. ...rustonomicon chapters
