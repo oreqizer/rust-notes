@@ -88,7 +88,7 @@ fn print_longest_desugar<'a, 'b>(s1: &'a str, s2: &'b str) {
     println!("{}", if s1.len() > s2.len() { s1 } else { s2 });
 }
 // elides to
-fn print_longest2(s1: &str, s2: &str) {
+fn print_longest(s1: &str, s2: &str) {
     println!("{}", if s1.len() > s2.len() { s1 } else { s2 });
 }
 ```
@@ -152,6 +152,30 @@ impl<'a> Text<'a> {
 
 ## Static
 
-The `'static` lifetime is the _subtype_ of all other lifetimes.
+The `'static` lifetime is the _subtype_ of all other lifetimes — it lives for
+the entire duration of the program.
 
-_TODO_
+The most notable example is _string literals_, whose full type is `&'static str`:
+
+```rust
+fn gimme_bigger<'a>(s1: &'a str, s2: &'a str) -> &'a str {
+    if s1.len() > s2.len() {
+        s1
+    } else {
+        s2
+    }
+}
+
+fn main() {
+    let s1 = "kekega";                 // &'static str
+    let res;
+    {
+        let s2 = "bur";                // &'static str
+        res = gimme_bigger(&s1, &s2);  // res has lifetime 'static
+    } 
+    println!("bigger is {}", res);     // ok 🎉
+}
+```
+
+Other references `'static` lifetimes are ones created in the _global scope_
+declared as `static`.
