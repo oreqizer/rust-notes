@@ -84,7 +84,7 @@ a function's parameter and return value's lifetime-parameters can be inferred.
 The first rule states that all _input references_ get their own lifetime-parameter:
 
 ```rust
-fn print_longest_desugar<'a, 'b>(s1: &'a str, s2: &'b str) {
+fn print_longest<'a, 'b>(s1: &'a str, s2: &'b str) {
     println!("{}", if s1.len() > s2.len() { s1 } else { s2 });
 }
 // elides to
@@ -98,7 +98,7 @@ and _returns references_, the returned references' lifetime is the same as the i
 reference's lifetime:
 
 ```rust
-fn first_half_desugar<'a>(s: &'a str) -> &'a str {
+fn first_half<'a>(s: &'a str) -> &'a str {
     let h = s.len() / 2;
     &s[..h]
 }
@@ -119,7 +119,7 @@ struct Text<'a> {
 }
 
 impl<'a> Text<'a> {
-    fn print_other_get_desugar<'b>(self: &'a Self, s: &'b str) -> &'a str {
+    fn print_other_get<'b>(self: &'a Self, s: &'b str) -> &'a str {
         println!("other is {}", s);
         self.text
     }
