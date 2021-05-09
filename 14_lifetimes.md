@@ -63,6 +63,11 @@ fn main() {
 The `res` reference has the shorter lifetime `'b`. When used in the `println!`
 macro, `'b` already out of scope, and so is `res`, the program will not compile.
 
+Lifetime-parameters can also be used with _mutable references_:
+- `&i32` - a reference
+- `&'a i32` - a reference with a lifetime-parameterr
+- `&'a mut i32` - a _mutable_ reference with a lifetime parameter
+
 ## Subtyping
 
 _Subtyping_ is a type of compile time polymorphism that check whether operations
@@ -73,7 +78,77 @@ then `'a` is a _subtype_ of `'b`.
 
 ## Elision
 
-_TODO_
+Rust has a set of _lifetime elision_ rules built into the compiler for cases when
+a function's parameter and return value's lifetime-parameters can be inferred.
+
+The first rule states that all _input references_ get their own lifetime-parameter:
+
+```rust
+fn print_longest_desugar<'a, 'b>(s1: &'a str, s2: &'b str) {
+    println!("{}", if s1.len() > s2.len() { s1 } else { s2 });
+}
+// elides to
+fn print_longest2(s1: &str, s2: &str) {
+    println!("{}", if s1.len() > s2.len() { s1 } else { s2 });
+}
+```
+
+The second rule is that when the function takes a _single reference_ as an argument
+and _returns references_, the returned references' lifetime is the same as the input
+reference's lifetime:
+
+```rust
+fn first_half_desugar<'a>(s: &'a str) -> &'a str {
+    let h = s.len() / 2;
+    &s[..h]
+}
+// elides to
+fn first_half(s: &str) -> &str {
+    let h = s.len() / 2;
+    &s[..h]
+}
+```
+
+The third rule states that when a method that takes `&self` returns references, the
+returned references' lifetime is the same as the lifetime of `&self`, even if it also
+takes other references:
+
+```rust
+struct Text<'a> {
+    text: &'a str,
+}
+
+impl<'a> Text<'a> {
+    fn print_other_get_desugar<'b>(self: &'a Self, s: &'b str) -> &'a str {
+        println!("other is {}", s);
+        self.text
+    }
+    // elides to
+    fn print_other_get(&self, s: &str) -> &str {
+        println!("other is {}", s);
+        self.text
+    }
+}
+```
+
+This works only if it returns a reference from `&self`. Returning a different
+reference needs explicit lifetime-parameters:
+
+```rust
+struct Text<'a> {
+    text: &'a str,
+}
+
+impl<'a> Text<'a> {
+    fn or_longer(&self, s: &'a str) -> &'a str {
+        if self.text.len() > s.len() {
+            self.text
+        } else {
+            s
+        }
+    }
+}
+```
 
 ## Static
 
