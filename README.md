@@ -6,15 +6,14 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 
 ## TODO
 
-14. lifetimes
 15. closures, move
-16. patterns
-17. modules & workspaces
-18. tests + docs
-19. vectors
-20. strings
-21. hashmaps
-22. iterators
+16. iterators
+17. patterns
+18. modules & workspaces
+19. tests + docs
+20. vectors
+21. strings
+22. hashmaps
 23. boxes
 24. rcs
 25. refcells
