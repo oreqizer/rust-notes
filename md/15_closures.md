@@ -77,21 +77,6 @@ fn main() {
 If `a` was `i32`, this code would work, because `i32` implements `Copy`, and `a`
 would get captured as `&a`. The `b` variable would get a copy of the value.
 
-## Arguments
-
-Closures are the most useful as _arguments to functions_ that perform certain
-action:
-
-```rust
-fn do_twice<T>(f: impl Fn(T) -> T, a: T) -> T {
-    f(f(a))
-}
-
-fn main() {
-    println!("do add twice with x = 5: {}", do_twice(|x| x + x, 5));
-}
-```
-
 ## Keyword `move`
 
 The `move` keyword transforms captured variabled by _reference_ or _mutable

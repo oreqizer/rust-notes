@@ -1,6 +1,6 @@
 # Rust
 
-Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/stable/book/). 🦀
+Notes I take during learning **Rust** from [The Rust book](https://doc.rust-lang.org/stable/book/). 🦀
 
 Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapters. 🙀
 
@@ -34,4 +34,3 @@ _TODO_
 22. Threads
 23. Unsafe
 24. Macros
-
