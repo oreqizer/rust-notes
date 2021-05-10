@@ -17,22 +17,18 @@ fn main() {
 }
 ```
 
-When a closure _closes over_ its environment, all variables the closure uses
-are considered _borrowed_ and cannot be changed:
+If the closure only contains a single expression, the block brackets `{}` can
+be left out. Closures can be type-annotated as regular functions, but types are
+inferrable:
 
 ```rust
 fn main() {
-    let mut var = 4;
-    let add_var = |x| x + var;
-
-    // var = 5;  // nope 🙀 var is borrowed
-    println!("{} + 3 = {}", var, add_var(3));
-    var = 5;  // ok 👌 var no longer used
+    let squared = |x: i32| -> i32 { x * x };  // full syntax
+    let squared = |x: i32| -> i32 x * x ;     // no block
+    let squared = |x| { x * x };              // inferred type (more flexible)
+    let squared = |x| x * x;                  // inferred type and no block
 }
 ```
-
-Note that doing `var = 5;` after `add_var` is no longer used is only possible
-thanks to [non-lexical lifetimes](https://stackoverflow.com/questions/50251487/what-are-non-lexical-lifetimes).
 
 ## Borrowing
 
