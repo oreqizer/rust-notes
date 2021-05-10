@@ -23,7 +23,7 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 14. [Lifetimes](md/14_lifetimes.md)
 15. [Closures](md/15_closures.md)
 16. [Ierators](md/16_iterators.md)
-    
+
 _TODO_
 
 17. Collections (Vec<T>, String, HashMap<U, T>)
