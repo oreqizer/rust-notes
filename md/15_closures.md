@@ -95,7 +95,7 @@ fn main() {
 }
 ```
 
-## The `Fn` family
+## The `Fn` trait
 
 There are _three_ traits in the `Fn` family:
 - `Fn` with the `call` method that takes `&self`
@@ -106,6 +106,27 @@ Closures that capture by _reference_ implement the `Fn` trait. Closures that cap
 by _mutable reference_ implement `FnMut` and allow mutating the environment.
 Closures capturing by _value_ implement `FnOnce`, because once they're called, the
 values are moved, and cannot be called again.
+
+### Functions
+
+Function pointers implement the `Fn` trait and can be used as such:
+
+```rust
+fn apply_twice<T>(f: impl Fn(T) -> T, a: T) -> T {
+    f(f(a))
+}
+
+fn times_two(x: i32) -> i32 {
+    x * 2
+}
+
+fn main() {
+    println!("function: {}", apply_twice(times_two, 3));
+    println!("closure: {}", apply_twice(|x| x * 2, 5));
+}
+```
+
+### As structs
 
 Closures are actually implemented as _structs_ created at compile time. The
 captured environment becomes the struct's fields. The created struct implements
