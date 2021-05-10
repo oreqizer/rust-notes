@@ -6,17 +6,12 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 
 ## TODO
 
-15. closures, move
 16. iterators
-17. patterns
-18. modules & workspaces
-19. tests + docs
-20. vectors
-21. strings
-22. hashmaps
-23. boxes
-24. rcs
-25. refcells
-26. threads
-27. unsafe
-28. macros
+17. collections (vectors, strings, hashmaps)
+18. patterns
+19. modules & workspaces
+20. tests + docs
+21. smart pointers (boxes, rcs, refcells)
+22. threads
+23. unsafe
+24. macros
