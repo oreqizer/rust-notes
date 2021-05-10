@@ -4,14 +4,34 @@ Stuff I do during learning Rust from [The Rust book](https://doc.rust-lang.org/s
 
 Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapters. 🙀
 
-## TODO
+## Topics
 
-16. iterators
-17. collections (vectors, strings, hashmaps)
-18. patterns
-19. modules & workspaces
-20. tests + docs
-21. smart pointers (boxes, rcs, refcells)
-22. threads
-23. unsafe
-24. macros
+0. [Intro](md/00_intro.md)
+1. [Variables](md/01_variables.md)
+2. [Functions](md/02_functions.md)
+3. [Control flow](md/03_control_flow.md)
+4. [Primitives](md/04_primitives.md)
+5. [Ownership](md/05_ownership.md)
+6. [References](md/06_references.md)
+7. [Slices](md/07_slices.md)
+8. [Structs](md/08_structs.md)
+9. [Enums](md/09_enums.md)
+10. [Generics](md/10_generics.md)
+11. [Traits](md/11_traits.md)
+12. [Types](md/12_types.md)
+13. [Effects](md/13_effects.md)
+14. [Lifetimes](md/14_lifetimes.md)
+15. [Closures](md/15_closures.md)
+    
+_TODO_
+
+16. Iterators
+17. Collections (Vec<T>, String, HashMap<U, T>)
+18. Patterns
+19. Modules (Workspaces)
+20. Tests (docs)
+21. Smart pointers (Box<T>, Rc<T>, RefCell<T>)
+22. Threads
+23. Unsafe
+24. Macros
+
