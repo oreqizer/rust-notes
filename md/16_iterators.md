@@ -1,7 +1,7 @@
 # Iterators
 
-Types that implement the `Iterator` trait. The functional way of processing
-a collection of items:
+Types that implement the `Iterator` trait. The functional way of processing a
+collection of items:
 
 ```rust
 struct User {
@@ -29,34 +29,36 @@ iterator's next element, if any. The definition looks like this:
 trait Iterator {
     type Item;
     fn next(&mut self) -> Option<Self::Item>;
-    
+
     // methods with default implementations elided
 }
 ```
 
 The `next`'s method's responsibility is to:
+
 - return the next element, if any
 - mutate the iterator to advance on the next element
 
 ### Trait `IntoIterator`
 
-Types that describe a collection commonly implement the `IntoIterator` trait that
-defines how the type will be converted into an _iterator_:
+Types that describe a collection commonly implement the `IntoIterator` trait
+that defines how the type will be converted into an _iterator_:
 
 ```rust
 trait IntoIterator {
     type Item;
-    type IntoIter: Iterator<Item = Self::Item>;
+    type IntoIter: Iterator<Item=Self::Item>;
     fn into_iter(self) -> Self::IntoIter;
 }
 ```
 
-Note that the `into_iter` method takes `self` as an argument, thus taking ownership
-of the type that implements the trait.
+Note that the `into_iter` method takes `self` as an argument, thus taking
+ownership of the type that implements the trait.
 
 ### In `for` loops
 
-The `for` loop is actually a syntax sugar for iterators. Implementing `IntoIterator`
+The `for` loop is actually a syntax sugar for iterators.
+Implementing `IntoIterator`
 allows usage in `for` loops:
 
 ```rust
@@ -79,12 +81,14 @@ fn main() {
 ### Conventions
 
 The convention is to define and call methods:
+
 - `into_iter(self)` for iterating over `T` via the `IntoIterator` trait
 - `iter(&self)` for iterating over `&T` by _convention_
 - `iter_mut(&mut self)` for iterating over `&mut T` by _convention_
 
 Types commonly implement the `IntoIterator` trait **3-times**, once for each
 variant. For example, `Vec<T>` implementations are:
+
 - `impl<T> IntoIterator for Vec<T>`
 - `impl<'a, T> IntoIterator for &'a Vec<T>` that calls `iter(&self)`
 - `impl<'a, T> IntoIterator for &'a mut Vec<T>` that calls `iter_mut(&mut self)`
@@ -102,12 +106,12 @@ fn main() {
     for n in v {
         println!("copy of n = {}", n);
     }
-    
+
     // &Vec<T>, values are &T
     for n in &v {
         println!("ref of &n = {}", n);
     }
-    
+
     // &mut Vec<T>, values are &mut T
     let mut v = v;
     for n in &mut v {
@@ -117,13 +121,16 @@ fn main() {
 ```
 
 Using the generic `into_iter` method directly **is context dependent**  and can
-sometimes yield unexpected results. It is recommended calling `iter` or `iter_mut`
-explicitly, if available.
+sometimes yield unexpected results. It is recommended calling `iter`
+or `iter_mut` explicitly, if available.
 
 ## Methods
 
 In addition to the mandatory `next` method, `Iterator` has a set of _consuming_
 and _producing_ methods called _adaptors_.
+
+Iterators are **lazy** — no adaptors get called until the iterator is actually
+consumed by calling the `next` function.
 
 ### Consuming
 
@@ -141,5 +148,19 @@ fn first_or_second(nums: &[i32]) -> (i32, i32) {
 
 ### Producing
 
-A method that produces a new iterator is called an _iterator adaptor_. _TODO_
+A method that produces a new iterator is called an _iterator adaptor_. They
+perform transformations such as _mapping_, _filtering_, _zipping_, and others:
 
+```rust
+fn long_ass_function(a1: &[i32], a2: &[i32]) -> i32 {
+    a1.iter()
+        .zip(a2)
+        .filter(|(&a, &b)| a > 0 && b > 0)
+        .map(|(a, b)| a * b)
+        .sum()
+}
+```
+
+Check
+the [official docs](https://doc.rust-lang.org/std/iter/trait.Iterator.html#provided-methods)
+for the full list of functions, many are useful in everyday programming!
