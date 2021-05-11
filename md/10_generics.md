@@ -19,11 +19,11 @@ The compiler substitutes these placeholders for concrete types on compile time.
 
 ## Defaults
 
-The type can be defaulted using the `T=Default` syntax, overwritten using `::<>`,
-aka the **turbofish**:
+The type can be defaulted using the `T=Default` syntax, overwritten using
+`::<>`, aka the **turbofish**:
 
 ```rust
-struct Point<T=u64>(T, T);
+struct Point<T = u64>(T, T);
 
 fn main() {
     let p = Point(13, 37);        // u64
@@ -33,7 +33,7 @@ fn main() {
 
 ## Associated type
 
-Associated types are a type of generics whose purpose is to simplify code 
+Associated types are a type of generics whose purpose is to simplify code
 management.
 
 > Code using the associated type can be replaced with code using the
@@ -69,12 +69,13 @@ fn distance<N, E, G: Graph<N, E>>(graph: &G, start: &N, end: &N) -> uint {
 Associated types can be defaulted, allowing both flexibility and clean syntax:
 
 ```rust
-trait Add<Rhs=Self> {
+trait Add<Rhs = Self> {
     type Output = Rhs;
     fn add(&self, rhs: Rhs) -> Self::Output;
 }
 
 struct Meters(u32);
+
 struct Millimeters(u32);
 
 impl Add for Meters {

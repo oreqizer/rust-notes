@@ -1,6 +1,7 @@
 # Intro
 
 **Rust** is a compiled, statically and strongly typed language. Main features:
+
 - memory safety
 - low-level performance
 - zero-cost abstractions
@@ -17,14 +18,17 @@ Overview of Rust's main constructs and conventions.
 * **tuples** are collections of values of different types, `(i32, i32, &str)`
 * **references** allow _borrowing_ data, `&value`
 * **slices** offer referencing data sequences with a variable size, `[T]`, `str`
-* **structs** hold related data and define related **methods**, `vector.normalize()`
+* **structs** hold related data and define related **methods**
+  , `vector.normalize()`
 * **enums** define _variants_ of types, `Result<T, E>` and its `Ok(T)`, `Err(E)`
 * **generics** allow parameters of different types `Vec<T>`
 * **traits** define behavior that types have like `ToString`
-* **DSTs** are types with size not known at compile time, `dyn Trait`, `[T]`, `str`
-* **lifetimes** ensure data validity like `'static`,`'a`
+* **DSTs** are types with size not known at compile time, `dyn Trait`, `[T]`
+  , `str`
+* **lifetimes** ensure data validity, `'static`,`'a`
 * **closures** are anonymous functions that capture their context, `|x| x * 2`
-* **macros** for metaprogramming, declarative and procedural, `println!("a macro")`
+* **macros** for metaprogramming, declarative and
+  procedural, `println!("a macro")`
   or `#[derive(Debug)]`
 
 ### Comments
@@ -46,7 +50,8 @@ Comments are specified after `//`. No special multiline syntax.
 
 `cargo new <name>`
 
-Generates
+Generates:
+
 ```
 src/
   main.rs
@@ -58,7 +63,8 @@ Cargo.toml
 
 `cargo new --lib <name>`
 
-Generates
+Generates:
+
 ```
 src/
   lib.rs

@@ -18,8 +18,9 @@ This is how slices are stored in memory:
 
 ## Range
 
-Ranges are defined using the `..` syntax for exclusive, and `..=` for inclusive range.
-The first or last index can be dropped to capture the start or end of a collection:
+Ranges are defined using the `..` syntax for exclusive, and `..=` for inclusive
+range. The first or last index can be dropped to capture the start or end of a
+collection:
 
 ```rust
 fn main() {
@@ -37,13 +38,14 @@ fn main() {
 ## Collections
 
 More complex collections such as `Vec<T>` or `String` use primitive collections
-such as arrays and `str` data under the hood. They mainly serve as an abstraction
-for data manipulation using methods such as `Vec::push` or `String::push_str`.
+such as arrays and `str` data under the hood. They mainly serve as an
+abstraction for data manipulation using methods such as `Vec::push`
+or `String::push_str`.
 
 ### Dereferencing
 
-Data types that use primitive collections under the hood implement the `Deref` trait
-so that they return a slice of the underlying data when sliced:
+Data types that use primitive collections under the hood implement the `Deref`
+trait so that they return a slice of the underlying data when sliced:
 
 ```rust
 fn main() {
@@ -58,9 +60,9 @@ fn main() {
 
 ### Arguments
 
-When a funciton does an _immutable borrow_ of a collection, the best practice is to
-use slices as arguments instead of a specific collection implementation. This allows
-passing both raw values and more abstract data types:
+When a funciton does an _immutable borrow_ of a collection, the best practice is
+to use slices as arguments instead of a specific collection implementation. This
+allows passing both raw values and more abstract data types:
 
 ```rust
 fn main() {
@@ -86,7 +88,7 @@ fn split_half(a: &[i32]) -> (&[i32], &[i32]) {
 ```rust
 fn main() {
     let word = String::from("lolkekbur");
-    
+
     let s = after_n(3, &word[..]);  // is the explicit form
     let s = after_n(3, &word);      // turns into &word[..]
     let s = after_n(3, &&&word);    // turns into *&*&&word[..]

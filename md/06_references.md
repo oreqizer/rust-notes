@@ -18,8 +18,8 @@ Reference to a fat pointer to a value stored on the heap:
 
 ![Reference to a fat pointer](../assets/string_ptr_ref.svg)
 
-References are _immutable_ by default. Only mutable variables can be borrowed as mutable.
-Use `&mut` to make a reference _mutable_:
+References are _immutable_ by default. Only mutable variables can be borrowed as
+mutable. Use `&mut` to make a reference _mutable_:
 
 ```rust
 fn main() {
@@ -33,6 +33,7 @@ fn append_kek(s: &mut String) {
 ```
 
 References must obey the following rules:
+
 - there can be any number of _immutable_ references
 - there can be only one _mutable_ reference
 - when a _mutable_ reference exists, no _immutable_ reference can exist
@@ -54,9 +55,9 @@ fn main() {
 }
 ```
 
-References whose values were created inside a function cannot be returned
-from within the function. Functions can only return created _primitives_
-and _fat pointers_:
+References whose values were created inside a function cannot be returned from
+within the function. Functions can only return created _primitives_ and _fat
+pointers_:
 
 ```rust
 // OK, value copied

@@ -1,12 +1,13 @@
 # Ownership
 
 Rust's ownership system follows these rules:
+
 - Each value has a variable that’s called its _owner_
 - There can only be one owner at a time
 - When the owner goes out of scope, the value will be dropped
 
-Values have to have a _fixed size_ known at _compile time_ to be stored
-on the _stack_.
+Values have to have a _fixed size_ known at _compile time_ to be stored on the 
+_stack_.
 
 Variable- or dynamically-sized data are stored on the _heap_, and their
 _pointer_ is stored on the stack.
@@ -48,8 +49,8 @@ fn gimme_number(n: i32) {  // n copied, has the scope of the function
 
 ## Allocation
 
-When a dynamic memory is allocated, a _fat pointer_ to this data is stored
-into a variable.
+When a dynamic memory is allocated, a _fat pointer_ to this data is stored into
+a variable.
 
 > A _fat pointer_ is a pointer containing additional metadata, like length
 > and capacity.

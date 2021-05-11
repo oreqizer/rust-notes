@@ -22,7 +22,7 @@ fn only_big_nums(x: i32) -> Option<i32> {
 
 fn main() {
     let n = only_big_nums(1337);
-    
+
     match n {
         Some(_) => println!("That is big!"),
         None => println!("Small"),
@@ -32,8 +32,8 @@ fn main() {
 
 ## Result
 
-The `Result<T, E>` enum is for operations that can fail and contains
-either a _value_ or an _error_:
+The `Result<T, E>` enum is for operations that can fail and contains either a _
+value_ or an _error_:
 
 ```rust
 enum Result<T, E> {
@@ -79,8 +79,8 @@ fn read_username_from_file() -> Result<String, io::Error> {
 ```
 
 The `?` operator placed after a function that returns an `Option` or `Result`
-_unwraps_ the value if the result is `Some(T)` or `Ok(T)`. If the funciton
-ends with `None` or `Err(E)`, it is returned from with this value.
+_unwraps_ the value if the result is `Some(T)` or `Ok(T)`. If the funciton ends
+with `None` or `Err(E)`, it is returned from with this value.
 
 ## Panic
 
@@ -99,8 +99,8 @@ fn main() {
 }
 ```
 
-A `panic!` called in the main thread terminates all other threads and exits
-the program with an error code `101`.
+A `panic!` called in the main thread terminates all other threads and exits the
+program with an error code `101`.
 
 ### Unwrap
 
@@ -115,13 +115,14 @@ fn main() {
 ```
 
 Variants:
-* `.unwrap_or(T)` returns the supplied default if `None` or `Err(E)`
-* `.unwrap_or_default()` returns the type's default value if `None` or `Err(E)`
-* `.unwrap_or_else(Fn(E) -> T)` calls the closure if `None` or `Err(E)`
-* `.unwrap_err()` panics with the value if value is `Some(T)` or `Ok(T)`
 
-Useful when the programmer knows more than the compiler, and is sure that
-the code at hand will never fail.
+- `.unwrap_or(T)` returns the supplied default if `None` or `Err(E)`
+- `.unwrap_or_default()` returns the type's default value if `None` or `Err(E)`
+- `.unwrap_or_else(Fn(E) -> T)` calls the closure if `None` or `Err(E)`
+- `.unwrap_err()` panics with the value if value is `Some(T)` or `Ok(T)`
+
+Useful when the programmer knows more than the compiler, and is sure that the
+code at hand will never fail.
 
 ### Expect
 
@@ -135,4 +136,5 @@ fn main() {
 ```
 
 Variants:
-* `.expect_err()` panics with the value if value is `Some(T)` or `Ok(T)`
+
+- `.expect_err()` panics with the value if value is `Some(T)` or `Ok(T)`

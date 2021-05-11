@@ -4,8 +4,8 @@ The type system has various patterns and advanced constructs to be aware of.
 
 ## Type alias
 
-Type aliases can be specified using the `type` keyword and used in-place of
-the original type:
+Type aliases can be specified using the `type` keyword and used in-place of the
+original type:
 
 ```rust
 type ID = i32;
@@ -31,6 +31,7 @@ fn wrap_add(f: Thunk, a: i32) -> Thunk {
 
 The _newtype_ pattern (name from **Haskell**) is wrapping a single type in a
 struct. It is mainly useful for:
+
 - implementing _external traits_ on _external types_
 - enforcing type safety on more abstract types
 - hiding implementation details
@@ -49,13 +50,14 @@ impl Display for Wrapper {
 }
 ```
 
-Giving types more explicit names and implementing additional functionality
-on them has the additional benefit of type safety:
+Giving types more explicit names and implementing additional functionality on
+them has the additional benefit of type safety:
 
 ```rust
 use std::ops::Add;
 
 struct Meters(u32);
+
 struct Millimeters(u32);
 
 impl Meters {
@@ -94,8 +96,8 @@ impl People {
 ```
 
 Consumers of this code do not need to know that `People` is implemented as
-a `HashMap`, which allows restricting the public API and makes refactoring
-a lot easier.
+a `HashMap`, which allows restricting the public API and makes refactoring a lot
+easier.
 
 ## Never
 
@@ -131,14 +133,15 @@ fn int_or_bye(o: Option<i32>) -> i32 {
 
 ## DSTs
 
-_Dynamically sized types_ are types whose size is not known at compile time.
-The two major DSTs exposed by the language are:
+_Dynamically sized types_ are types whose size is not known at compile time. The
+two major DSTs exposed by the language are:
+
 - trait objects `dyn Trait`
 - references like `[T]` and `str`
 
 DSTs **must** exist behind a fat pointer, which contains information that
-_complete_ the pointer with necessary information, like the _vtable_ of a
-trait object, or a slice's size.
+_complete_ the pointer with necessary information, like the _vtable_ of a trait
+object, or a slice's size.
 
 By default, generic parameters implicitly have the `Sized` trait bound which
 only allows statically sized types:
@@ -151,8 +154,8 @@ fn sized<T: Sized>(a: T) {
 }
 ```
 
-Allowing DSTs is possible with specifying the `?Sized` trait bound, but only
-a reference to this type can be passed:
+Allowing DSTs is possible with specifying the `?Sized` trait bound, but only a
+reference to this type can be passed:
 
 ```rust
 fn sized<T: Display>(a: &T) {
@@ -174,9 +177,9 @@ definition even when using the `where` syntax:
 
 ```rust
 fn some_function<T: ?Sized, U>(t: &T, u: &U)
-where
-    T: Display + Clone,
-    U: PartialOrd + Debug,
+    where
+        T: Display + Clone,
+        U: PartialOrd + Debug,
 {
     // ...
 }

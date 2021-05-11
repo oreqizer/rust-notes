@@ -1,6 +1,7 @@
 # Closures
 
 Anonymous functions that can _capture their environment_:
+
 - by reference `&T`
 - by mutable reference `&mut T`
 - by value `T`
@@ -17,14 +18,14 @@ fn main() {
 }
 ```
 
-If the closure only contains a single expression, the block brackets `{}` can
-be left out. Closures can be type-annotated as regular functions, but types are
+If the closure only contains a single expression, the block brackets `{}` can be
+left out. Closures can be type-annotated as regular functions, but types are
 inferrable:
 
 ```rust
 fn main() {
     let squared = |x: i32| -> i32 { x * x };  // full syntax
-    let squared = |x: i32| -> i32 x * x ;     // no block
+    let squared = |x: i32| -> i32 x * x;     // no block
     let squared = |x| { x * x };              // inferred type (more flexible)
     let squared = |x| x * x;                  // inferred type and no block
 }
@@ -85,7 +86,7 @@ reference_ to _owned by value_:
 ```rust
 use std::ops::Add;
 
-fn make_adder<T: Add<Output = T> + Copy>(x: T) -> impl Fn(T) -> T {
+fn make_adder<T: Add<Output=T> + Copy>(x: T) -> impl Fn(T) -> T {
     move |y| x + y
 }
 
@@ -98,14 +99,15 @@ fn main() {
 ## The `Fn` trait
 
 There are _three_ traits in the `Fn` family:
+
 - `Fn` with the `call` method that takes `&self`
 - `FnMut` (supertrait of `Fn`) with the `call_mut` method that takes `&mut self`
 - `FnOnce` (supertrait of `FnMut`) with the `call_once` method that takes `self`
 
-Closures that capture by _reference_ implement the `Fn` trait. Closures that capture
-by _mutable reference_ implement `FnMut` and allow mutating the environment.
-Closures capturing by _value_ implement `FnOnce`, because once they're called, the
-values are moved, and cannot be called again.
+Closures that capture by _reference_ implement the `Fn` trait. Closures that
+capture by _mutable reference_ implement `FnMut` and allow mutating the
+environment. Closures capturing by _value_ implement `FnOnce`, because once
+they're called, the values are moved, and cannot be called again.
 
 ### Functions
 
@@ -155,8 +157,8 @@ fn main() {
 }
 ```
 
-A similar example for `FnMut` also shows why closures that mutate the environment
-_must_ be marked as `mut` — the environment is a mutable `struct`:
+A similar example for `FnMut` also shows why closures that mutate the
+environment _must_ be marked as `mut` — the environment is a mutable `struct`:
 
 ```rust
 // captured mutable environment

@@ -1,6 +1,7 @@
 # Traits
 
 Traits give types _behaviour_ via methods they implement, such as:
+
 * `Add` trait allows the use of `+`
 * `PartialOrd` makes types comparable
 * `Display` enables automatic formatting
@@ -9,8 +10,8 @@ Traits give types _behaviour_ via methods they implement, such as:
 > have to be internal types. _External traits_ cannot be implemented on
 > _external types_.
 
-They are defined using the `trait` keyword, and a list of methods a type
-should implement:
+They are defined using the `trait` keyword, and a list of methods a type should
+implement:
 
 ```rust
 trait Summary {
@@ -89,21 +90,21 @@ Multiple trait bounds can be combined using `+`:
 ```rust
 fn print_largest<T: PartialOrd + Display>(s: &[T]) {
     let res = s.iter().reduce(|acc, x| if x > acc { x } else { acc });
-    
+
     if let Some(l) = res {
         println!("largest is {}", l);
     }
 }
 ```
 
-An alternative `where` syntax exists for when there are too many generic parameters
-with many trait bounds:
+An alternative `where` syntax exists for when there are too many generic
+parameters with many trait bounds:
 
 ```rust
 fn some_function<T, U>(t: &T, u: &U)
-where
-    T: Display + Clone,
-    U: PartialOrd + Debug,
+    where
+        T: Display + Clone,
+        U: PartialOrd + Debug,
 {
     // ...
 }
@@ -111,8 +112,8 @@ where
 
 ### Method implementation
 
-Trait bounds can be used for conditionally implementing methods on generic types in case
-the concrete type satisfies the bounds:
+Trait bounds can be used for conditionally implementing methods on generic types
+in case the concrete type satisfies the bounds:
 
 ```rust
 struct Pair<T> {
@@ -160,13 +161,15 @@ impl Pair<i32> {
 
 ## Trait objects
 
-The `dyn Trait` syntax allows specifying _trait objects_ — dynamic objects that implement
-the trait's behavior. They consist of two pointers:
+The `dyn Trait` syntax allows specifying _trait objects_ — dynamic objects that
+implement the trait's behavior. They consist of two pointers:
+
 - pointer to the actual data
 - pointer to the object's _virtual method table_
 
-Only _object-safe_ traits can be used in trait objects. The trait's methods must follow
-these rules:
+Only _object-safe_ traits can be used in trait objects. The trait's methods must
+follow these rules:
+
 - the return type is not `Self`
 - there are no generic type parameters
 
@@ -176,6 +179,7 @@ trait Draw {
 }
 
 struct Button;
+
 struct Select;
 
 impl Draw for Button {
@@ -198,14 +202,14 @@ fn main() {
 }
 ```
 
-Trait objects are mainly useful when it is impossible to use an `enum`, like when the number
-of possible types satisfying the trait is unknown.
+Trait objects are mainly useful when it is impossible to use an `enum`, like
+when the number of possible types satisfying the trait is unknown.
 
 ## Type `impl Trait`
 
-The `impl Trait` type annotation can be used in function _arguments_ and as a 
-_return_ type. It allows specifying unnamed, but concrete types that implement
-a trait:
+The `impl Trait` type annotation can be used in function _arguments_ and as a
+_return_ type. It allows specifying unnamed, but concrete types that implement a
+trait:
 
 ```rust
 trait Trait {}
@@ -233,8 +237,9 @@ using the turbofish syntax as with `foo::<usize>(1)`.
 
 ### Return
 
-The `impl Trait` syntax can be used when returning values from functions. Contrary
-to using `Box<dyn Trait>`, this does not cause the value to be stored on the heap:
+The `impl Trait` syntax can be used when returning values from functions.
+Contrary to using `Box<dyn Trait>`, this does not cause the value to be stored
+on the heap:
 
 ```rust
 trait Trait {}
@@ -257,7 +262,7 @@ fn returns_closure() -> impl Fn(i32) -> i32 {
 
 ## Supertraits
 
-Traits can require implementors to also implement other traits, becoming their 
+Traits can require implementors to also implement other traits, becoming their
 _supertraits_:
 
 ```rust
@@ -285,12 +290,13 @@ trait Mlg: Display + PartialOrd {
 ## Fully qualified syntax
 
 The _fully qualified syntax_ for function calls in the context of traits is:
+
 - `Trait::function(receiver, args..)` for methods
 - `<Type as Trait>::function(args..)` for associated functions
 
 A struct can implement a method that collides with the name of an implemented
-trait's method. Calling an associated function on the _trait_ with the struct
-as the _receiver_ calls the trait implementation:
+trait's method. Calling an associated function on the _trait_ with the struct as
+the _receiver_ calls the trait implementation:
 
 ```rust
 trait Pilot {
@@ -319,11 +325,11 @@ fn main() {
 ```
 
 The full form would be `<Human as Pilot>::fly(&h);`, but since Rust knows that
-`&h` is of type `&Human`, it knows which implementation of the `Pilot` trait
-to call.
+`&h` is of type `&Human`, it knows which implementation of the `Pilot` trait to
+call.
 
-When a struct's and a trait's associated function names collide, the struct
-has to be cast to the trait using `as` to call the trait's implementation:
+When a struct's and a trait's associated function names collide, the struct has
+to be cast to the trait using `as` to call the trait's implementation:
 
 ```rust
 trait Animal {
@@ -350,5 +356,5 @@ fn main() {
 }
 ```
 
-The short form `Animal::baby_name()` cannot be called, because Rust cannot
-infer the concrete implementation.
+The short form `Animal::baby_name()` cannot be called, because Rust cannot infer
+the concrete implementation.

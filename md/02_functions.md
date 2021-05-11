@@ -22,12 +22,14 @@ fn add_one(x: i32) -> i32 {
 
 ## Return
 
-Like in regular blocks, the last _expression_ in a function block is the _return value_:
+Like in regular blocks, the last _expression_ in a function block is the _return
+value_:
 
 ```rust
 fn add_one(x: i32) -> i32 {
     x + 1
 }
+
 // is the same as
 fn add_one_return(x: i32) -> i32 {
     return x + 1;
@@ -55,7 +57,7 @@ use std::num::ParseIntError;
 fn main() -> Result<(), ParseIntError> {
     let number_str = "10";
     let number = match number_str.parse::<i32>() {
-        Ok(number)  => number,
+        Ok(number) => number,
         Err(e) => return Err(e),
     };
     println!("{}", number);

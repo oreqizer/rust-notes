@@ -18,7 +18,7 @@ A fixed-size collection of values:
 ```rust
 fn main() {
     let vector = (1, 3, 3.7);
-    let single = (420,); // trailing comma needed for single element tuples
+    let single = (420, ); // trailing comma needed for single element tuples
 }
 ```
 
@@ -30,8 +30,8 @@ fn main() {
 }
 ```
 
-They're indexed with `.` and a number, e.g. `.0` for the first element. 
-Their type can be specified in arguments:
+They're indexed with `.` and a number, e.g. `.0` for the first element. Their
+type can be specified in arguments:
 
 ```rust
 fn multiply_vector(v: (i32, i32, i32), n: i32) -> (i32, i32, i32) {
@@ -41,8 +41,8 @@ fn multiply_vector(v: (i32, i32, i32), n: i32) -> (i32, i32, i32) {
 
 ## Arrays
 
-A collection of objects of the same type. Their length is known at _compile time_.
-Their signature is `[T; length]`.
+A collection of objects of the same type. Their length is known at _compile
+time_. Their signature is `[T; length]`.
 
 ```rust
 fn main() {

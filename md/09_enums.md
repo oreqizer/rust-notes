@@ -74,7 +74,7 @@ fn cents(coin: Coin) -> u8 {
 
 fn main() {
     let coin = Coin::Dime;
-    
+
     if let Coin::Penny = coin {
         println!("Penny!");
     }

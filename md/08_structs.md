@@ -19,8 +19,8 @@ struct Empty;
 
 ## Instances
 
-Because Rust has no zero or nullish values, structs need to be instantiated
-with all their fields filled:
+Because Rust has no zero or nullish values, structs need to be instantiated with
+all their fields filled:
 
 ```rust
 fn main() {
@@ -41,18 +41,18 @@ fn main() {
         email: String::from("blaze@michael.it"),
         credits: 0,
     };
-    
+
     user1.email = String::from("crash@team.racing");
 }
 ```
 
-Creating new structures from existing ones can be done using destructuring
-with the `..` syntax:
+Creating new structures from existing ones can be done using destructuring with
+the `..` syntax:
 
 ```rust
 fn main() {
     // ...
-    
+
     let user2 = User {
         username: String::from("_____samo_____"),
         ..user1
@@ -62,8 +62,8 @@ fn main() {
 
 ## Methods
 
-Methods on structs are defined using the `impl` block and can reference themselves
-using `self` as the first parameter:
+Methods on structs are defined using the `impl` block and can reference
+themselves using `self` as the first parameter:
 
 ```rust
 struct Rectangle {
@@ -78,14 +78,14 @@ impl Rectangle {
 }
 ```
 
-Ownership rules apply for the `self` parameter, so it can be specified as an immutable
-reference `&self` (most common), mutable reference `&mut self` or take the ownership
-of the value when specified as `self`.
+Ownership rules apply for the `self` parameter, so it can be specified as an
+immutable reference `&self` (most common), mutable reference `&mut self` or take
+the ownership of the value when specified as `self`.
 
 ### Self
 
-A special type `Self` is available in method definition that refers to the type the method
-is defined on:
+A special type `Self` is available in method definition that refers to the type
+the method is defined on:
 
 ```rust
 struct Rectangle {
@@ -100,16 +100,18 @@ impl Rectangle {
 }
 ```
 
-The `self` parameter notation is just a syntax sugar. The explicit forms look like this:
+The `self` parameter notation is just a syntax sugar. The explicit forms look
+like this:
+
 - `self` is `self: Self`
 - `&self` is `self: &Self`
 - `&mut self` is `self: &mut Self`
 
 ### Automatic ref/deref
 
-Rust's _automatic referencing and dereferencing_ feature allows uniform syntax when calling
-methods on types regardless of the type of `self` and the value. It adds `&`, `&mut` or `*`
-on the value before the method call as needed:
+Rust's _automatic referencing and dereferencing_ feature allows uniform syntax
+when calling methods on types regardless of the type of `self` and the value. It
+adds `&`, `&mut` or `*` on the value before the method call as needed:
 
 ```rust
 struct Point(i32, i32, i32);
@@ -132,8 +134,8 @@ fn main() {
 
 ## Associated functions
 
-Associated funcitons are defined in an `impl` block and don't use the `self` parameter.
-They are accessed on the structure name using `::`:
+Associated funcitons are defined in an `impl` block and don't use the `self`
+parameter. They are accessed on the structure name using `::`:
 
 ```rust
 struct Point(i32, i32);
@@ -152,16 +154,18 @@ fn main() {
 ## Fully qualified syntax
 
 The _fully qualified syntax_ for function calls of a type is:
+
 - `Type::function(receiver_if_method, args..)`
 
 ```rust
 fn main() {
     let mut v = vec![1, 2, 3];
-    
+
     v.push(4);
     // same as
     Vec::push(&mut v, 4);
 }
 ```
 
-Methods called with the full syntax allows the method to be used as a _function pointer_.
+Methods called with the full syntax allows the method to be used as a _function
+pointer_.

@@ -41,8 +41,8 @@ fn main() {
 }
 ```
 
-Initializing the same variable multiple times _shadows_ the previous declaration,
-types can differ:
+Initializing the same variable multiple times _shadows_ the previous
+declaration, types can differ:
 
 ```rust
 fn main() {
@@ -54,11 +54,12 @@ fn main() {
 
 ## Statics
 
-Static variables are declared using `static` in the global scope. They can be _mutable_,
-although mutable static variables is a bad practice because they're not thread safe.
-They must have a _type annotation_.
+Static variables are declared using `static` in the global scope. They can be
+_mutable_, although mutable static variables is a bad practice because they're
+not thread safe. They must have a _type annotation_.
 
-Static variables have a static place in memory and can be passed around as references.
+Static variables have a static place in memory and can be passed around as
+references.
 
 ```rust
 static NICKNAME: &str = "henchbruv";
@@ -67,12 +68,13 @@ static mut PLAYERS: u32 = 0; // :(
 
 ## Constants
 
-Constants are declared using `const` and are values that are inlined during compilation.
-They can be declared in any scope. They must have a _type annotation_.
-
-Unless interior mutability or a static place in memory is required, constants are
-preferred over statics.
+Constants are declared using `const` and are values that are inlined during
+compilation. They can be declared in any scope. They must have a _type
+annotation_.
 
 ```rust
 const MAX_VALUE: u32 = 1337;
 ```
+
+Unless interior mutability or a static place in memory is required, constants
+are preferred over statics.

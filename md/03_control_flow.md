@@ -1,11 +1,12 @@
 # Control flow
 
-Most of the control flow constructs except `for` and `while` loops are _expressions_.
+Most of the control flow constructs except `for` and `while` loops are
+_expressions_.
 
 ## Block
 
-Blocks create their own _scope_. They are an _expression_ with the value of
-the last expression in the block:
+Blocks create their own _scope_. They are an _expression_ with the value of the
+last expression in the block:
 
 ```rust
 fn main() {
@@ -18,8 +19,8 @@ fn main() {
 }
 ```
 
-Note that the last expression cannot be followed by `;` or it would be considered
-a _statement_ instead.
+Note that the last expression cannot be followed by `;` or it would be
+considered a _statement_ instead.
 
 ## If
 
@@ -43,8 +44,8 @@ fn rng(x: i32) -> i32 {
 
 ## Match
 
-A switch-like expression that matches patterns and values. Must be _exhaustive_ —
-all possible patterns and values must be matched at least in one arm:
+A switch-like expression that matches patterns and values. Must be _exhaustive_
+— all possible patterns and values must be matched at least in one arm:
 
 ```rust
 fn main() {
@@ -72,8 +73,8 @@ Can also have `else` and `else if` like regular `if` expressions.
 
 ## Loop
 
-Loops forever. The `break` statement can be called with a value to return a value
-from the `loop`.
+Loops forever. The `break` statement can be called with a value to return a
+value from the `loop`.
 
 ```rust
 fn main() {
