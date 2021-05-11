@@ -22,11 +22,11 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 13. [Effects](md/13_effects.md)
 14. [Lifetimes](md/14_lifetimes.md)
 15. [Closures](md/15_closures.md)
-16. [Ierators](md/16_iterators.md)
+16. [Iterators](md/16_iterators.md)
+17. [Collections](md/17_collections.md)
 
 _TODO_
 
-17. Collections (Vec<T>, String, HashMap<U, T>)
 18. Patterns
 19. Modules (Workspaces)
 20. Tests (docs)

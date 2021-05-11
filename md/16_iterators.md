@@ -55,6 +55,30 @@ trait IntoIterator {
 Note that the `into_iter` method takes `self` as an argument, thus taking
 ownership of the type that implements the trait.
 
+### Trait `FromIterator`
+
+In addition to `IntoIterator`, collection types can implement the `FromIterator`
+trait to allow usage of the `.collect()` method:
+
+```rust
+trait FromIterator<A> {
+    fn from_iter<T>(iter: T) -> Self
+    where
+        T: IntoIterator<Item = A>;
+}
+```
+
+The `IntoIterator` and `FromIterator` traits can be used in conjunction to
+iterate over values and collect them back:
+
+```rust
+fn main() {
+    let nums = vec![1, 2, 3, 4, 5, 6];
+
+    let big_nums: Vec<_> = nums.into_iter().filter(|&x| x > 3).collect();
+}
+```
+
 ### In `for` loops
 
 The `for` loop is actually a syntax sugar for iterators.
