@@ -35,7 +35,7 @@ Initialization can be deferred, _type annotation_ is optional:
 
 ```rust
 fn main() {
-    let mut z;
+    let z;
     // ...
     z = 6;
 }

@@ -12,7 +12,11 @@ _stack_.
 Variable- or dynamically-sized data are stored on the _heap_, and their
 _pointer_ is stored on the stack.
 
-## Scope
+## RAII
+
+Rust enforces [RAII](https://en.wikipedia.org/wiki/Resource_Acquisition_Is_Initialization)
+(Resource Acquisition Is Initialization). In addition to holding data on the
+stack, variables also _own_ resources allocated on the heap.
 
 Variable bindings have a _scope_, and are constrained to live in a _block_.
 Variables are valid as long as their scope is valid:
@@ -28,10 +32,14 @@ fn main() {
 }
 ```
 
-### Copying
+When a variable goes out of scope, its `Drop` trait destructor is called and its
+resources are freed.
+
+### Stack
 
 When a primitive value is assigned to another variable or passed to a function,
-its value is _copied_. This copy has its own scope in the function:
+its value is _copied_ and stored in the function's stack. This copy has its own
+scope in the function:
 
 ```rust
 fn main() {
@@ -47,7 +55,9 @@ fn gimme_number(n: i32) {  // n copied, has the scope of the function
 }                          // nothing special happens
 ```
 
-## Allocation
+When a function ends, the function's stack data are popped.
+
+### Heap
 
 When a dynamic memory is allocated, a _fat pointer_ to this data is stored into
 a variable.
@@ -55,7 +65,7 @@ a variable.
 > A _fat pointer_ is a pointer containing additional metadata, like length
 > and capacity.
 
-When this variable goes out of scope, the memory is freed:
+When this variable goes out of scope, its owned resources are freed:
 
 ```rust
 fn print_kek() {
@@ -68,7 +78,7 @@ This is how a `String` fat pointer looks like:
 
 ![String pointer](../assets/string_ptr.svg)
 
-### Moving
+## Moving
 
 When a fat pointer is assigned to a variable, the variable becomes the pointer's
 _owner_. If the pointer is assigned to another variable or passed to a function,

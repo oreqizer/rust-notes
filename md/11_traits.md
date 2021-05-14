@@ -159,6 +159,30 @@ impl Pair<i32> {
 }
 ```
 
+## Blanket implementation
+
+Implementation of a trait by satisfying another trait's bounds is called
+_blanket implementation_:
+
+```rust
+use std::fmt::Display;
+
+trait Trashtalk {
+    fn talk_trash(&self);
+}
+
+impl<T: Display> Trashtalk for T {
+    fn talk_trash(&self) {
+        println!("{} says: y'all should lift", self);
+    }
+}
+
+fn main() {
+    1337.talk_trash();
+    "Bobby".talk_trash();
+}
+```
+
 ## Trait objects
 
 The `dyn Trait` syntax allows specifying _trait objects_ — dynamic objects that

@@ -11,6 +11,38 @@ Rust has a wide variety of primitive values.
 * `bool` either `true` or `false`
 * unit type `()`, which is an empty tuple
 
+### Literals
+
+Integers `420`, floats `13.37`, chars `'a'`, strings `"kek"`, booleans `true`
+and the union type `()` can be expressed as literals.
+
+Integers can have a prefix to change their expression:
+
+- `0x` hexadecimals
+- `0o` octals
+- `0b` binary
+
+Numbers can have a suffix like `100u32` to set their type. Numeric literals can
+have `_` placed in them for readability, like `1_000_000`.
+
+Operators and their precedence is similar to **C-like** languages:
+
+```rust
+fn main() {
+    // Short-circuiting boolean logic
+    println!("true AND false is {}", true && false);
+    println!("true OR false is {}", true || false);
+    println!("NOT true is {}", !true);
+
+    // Bitwise operations
+    println!("0011 AND 0101 is {:04b}", 0b0011u32 & 0b0101);
+    println!("0011 OR 0101 is {:04b}", 0b0011u32 | 0b0101);
+    println!("0011 XOR 0101 is {:04b}", 0b0011u32 ^ 0b0101);
+    println!("1 << 5 is {}", 1u32 << 5);
+    println!("0x80 >> 2 is 0x{:x}", 0x80u32 >> 2);
+}
+```
+
 ## Tuples
 
 A fixed-size collection of values:

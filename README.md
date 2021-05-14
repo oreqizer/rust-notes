@@ -1,6 +1,7 @@
 # Rust
 
-Notes I take during learning **Rust** from [The Rust book](https://doc.rust-lang.org/stable/book/). 🦀
+Notes I take during learning **Rust** from [The Rust book](https://doc.rust-lang.org/stable/book/)
+and [Rust by example](https://doc.rust-lang.org/rust-by-example/). 🦀
 
 Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapters. 🙀
 
@@ -27,10 +28,13 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 
 _TODO_
 
-18. Patterns
+18. Patterns (+ `_`)
 19. Modules (Workspaces)
-20. Tests (docs)
-21. Smart pointers (Box<T>, Rc<T>, RefCell<T>)
+20. Tests (docs) + string formatting
+21. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
 22. Threads
 23. Unsafe
 24. Macros
+
+- mention [this](https://doc.rust-lang.org/rust-by-example/custom_types/enum/enum_use.html) in _modules_
+- go thru **Rust by example** and pick up missing info

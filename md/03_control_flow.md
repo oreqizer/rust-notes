@@ -116,3 +116,16 @@ fn main() {
     }
 }
 ```
+
+### While let
+
+Runs `while` the pattern matches, like in `if let`:
+
+```rust
+fn main() {
+    let mut stack: Vec<u32> = vec![3, 33, 44];
+    while let Some(num) = stack.pop() {
+        println!("popped {}", num);
+    }
+}
+```

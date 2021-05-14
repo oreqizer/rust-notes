@@ -17,10 +17,20 @@ impl<T> Point<T> {
 
 The compiler substitutes these placeholders for concrete types on compile time.
 
+## Turbofish
+
+Specifying _type parameters_ explicitly on generic types is done with the
+**turbofish** syntax `::<>`:
+
+```rust
+fn main() {
+    let v = (1..10).collect::<Vec<u32>>();
+}
+```
+
 ## Defaults
 
-The type can be defaulted using the `T=Default` syntax, overwritten using
-`::<>`, aka the **turbofish**:
+The type can be defaulted using the `T=Default` syntax:
 
 ```rust
 struct Point<T = u64>(T, T);

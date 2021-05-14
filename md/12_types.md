@@ -2,6 +2,52 @@
 
 The type system has various patterns and advanced constructs to be aware of.
 
+## Casting
+
+Casting can be done either implicitly by _ascribing_, or explicitly via the `as`
+keyword:
+
+```rust
+fn main() {
+    let int = 13;
+    let u: u8 = int;
+    let u = int as u8;
+}
+```
+
+The `as` keyword allows more _coersion_ than ascribing:
+
+```rust
+fn main() {
+    let float = 13.5;
+    // let u: u8 = float;  // nope 🙀
+    let u = float as u8;   // ok
+}
+```
+
+Type placeholder `_` can be used in places where a type can be inferred:
+
+```rust
+fn main() {
+    let v: Vec<_> = (1..10).collect(); // Vec<_> is Vec<i32>
+}
+```
+
+The `as` syntax can also be used with the type placeholder `_`, commonly used
+with pointers:
+
+```rust
+fn main() {
+    let n = 1337;
+    let r = &n;
+    let r = r as *const _;
+}
+```
+
+## Inference
+
+_TODO_ https://doc.rust-lang.org/rust-by-example/types/inference.html
+
 ## Type alias
 
 Type aliases can be specified using the `type` keyword and used in-place of the
@@ -98,6 +144,36 @@ impl People {
 Consumers of this code do not need to know that `People` is implemented as
 a `HashMap`, which allows restricting the public API and makes refactoring a lot
 easier.
+
+## Conversion
+
+The `From` and `Into` traits are used for _conversion_ of types from one into
+another.
+
+It is enough to implement the `From` trait, as the `Into` trait's implementation
+uses `From` trait bound in a _blanket implementation_:
+
+```rust
+struct Number {
+    value: i32,
+}
+
+impl From<i32> for Number {
+    fn from(value: i32) -> Self {
+        Number { value }
+    }
+}
+
+fn main() {
+    let a = 420;
+    
+    let n = Number::from(a);   // using From directly
+    let n: Number = a.into();  // blanket Into implementation
+}
+```
+
+For conversions that can fail, `TryFrom` and `TryInto` traits exist that return
+`Result<T, E>`.
 
 ## Never
 

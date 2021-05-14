@@ -34,6 +34,37 @@ fn main() {
 }
 ```
 
+## C-like
+
+Enums can be defined in a _C-like_ manner where they're actual enumerations when
+all variants are unit-like. They implicitly start at `0`:
+
+```rust
+enum Number {
+    Zero,  // 0
+    One,   // 1
+    Two,   // 2
+}
+
+fn main() {
+    println!("Zero = {}", Number::Zero as i32);
+}
+```
+
+Explicit denominators can be specified:
+
+```rust
+enum Color {
+    Red = 0xff0000,
+    Green = 0x00ff00,
+    Blue = 0x0000ff,
+}
+
+fn main() {
+    println!("Red = #{:06x}", Color::Red as i32);
+}
+```
+
 ## Methods
 
 Enums can define methods whose `self` parameter has the type of the enum:
