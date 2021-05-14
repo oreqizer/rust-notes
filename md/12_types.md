@@ -44,10 +44,6 @@ fn main() {
 }
 ```
 
-## Inference
-
-_TODO_ https://doc.rust-lang.org/rust-by-example/types/inference.html
-
 ## Type alias
 
 Type aliases can be specified using the `type` keyword and used in-place of the
