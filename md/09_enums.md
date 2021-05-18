@@ -61,7 +61,7 @@ enum Color {
 }
 
 fn main() {
-    println!("Red = #{:06x}", Color::Red as i32);
+    println!("Red = #{:x}", Color::Red as i32);
 }
 ```
 
