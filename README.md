@@ -25,17 +25,18 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 15. [Closures](md/15_closures.md)
 16. [Iterators](md/16_iterators.md)
 17. [Collections](md/17_collections.md)
+18. [Strings](md/18_strings.md)
 
 _TODO_
 
-17. Strings
-18. Patterns (+ `_`)
-19. Modules (Workspaces)
-20. Tests (docs) + string formatting
-21. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
-22. Threads
-23. Unsafe
-24. Macros
+18. String formatting
+19. Patterns (+ `_`)
+20. Modules (Workspaces)
+21. Tests (docs)
+22. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
+23. Threads
+24. Unsafe
+25. Macros
 
 - mention [this](https://doc.rust-lang.org/rust-by-example/custom_types/enum/enum_use.html) in _modules_
 - go thru **Rust by example** and pick up missing info
