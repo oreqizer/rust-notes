@@ -28,6 +28,7 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 
 _TODO_
 
+17. Strings
 18. Patterns (+ `_`)
 19. Modules (Workspaces)
 20. Tests (docs) + string formatting
