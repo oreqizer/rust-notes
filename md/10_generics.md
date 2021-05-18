@@ -15,7 +15,7 @@ impl<T> Point<T> {
 }
 ```
 
-The compiler substitutes these placeholders for concrete types on compile time.
+The compiler substitutes these placeholders for concrete types on compile-time.
 
 ## Turbofish
 

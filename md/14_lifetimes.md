@@ -32,7 +32,7 @@ fn gimme_bigger<'a>(s1: &'a str, s2: &'a str) -> &'a str {
 ```
 
 In this case, references `s1` and `s2` may have different lifetimes, and it is
-impossible to determine the returned reference's lifetime at compile time.
+impossible to determine the returned reference's lifetime at compile-time.
 
 When a lifetime-parameter is used on multiple references, the compiler choses _
 the shortest lifetime_ of all to ensure that the returned reference lives long
@@ -69,7 +69,7 @@ Lifetime-parameters can also be used with _mutable references_:
 
 ## Subtyping
 
-_Subtyping_ is a type of compile time polymorphism that check whether operations
+_Subtyping_ is a type of compile-time polymorphism that check whether operations
 working with a _supertype_ of type `T`, say `F<T>`, can operate also on type `T`
 .
 

@@ -130,7 +130,7 @@ fn main() {
 
 ### As structs
 
-Closures are actually implemented as _structs_ created at compile time. The
+Closures are actually implemented as _structs_ created at compile-time. The
 captured environment becomes the struct's fields. The created struct implements
 the proper `Fn` trait.
 

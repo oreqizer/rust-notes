@@ -6,7 +6,7 @@ Rust's ownership system follows these rules:
 - There can only be one owner at a time
 - When the owner goes out of scope, the value will be dropped
 
-Values have to have a _fixed size_ known at _compile time_ to be stored on the 
+Values have to have a _fixed size_ known at _compile-time_ to be stored on the 
 _stack_.
 
 Variable- or dynamically-sized data are stored on the _heap_, and their

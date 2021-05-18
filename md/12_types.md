@@ -78,7 +78,7 @@ struct. It is mainly useful for:
 - enforcing type safety on more abstract types
 - hiding implementation details
 
-There's no runtime penalty, the wrapper is removed at compile time.
+There's no runtime penalty, the wrapper is removed at compile-time.
 
 Avoiding the _orphan rule_ by wrapping `Vec<String>` and implementing `Display`:
 
@@ -205,7 +205,7 @@ fn int_or_bye(o: Option<i32>) -> i32 {
 
 ## DSTs
 
-_Dynamically sized types_ are types whose size is not known at compile time. The
+_Dynamically sized types_ are types whose size is not known at compile-time. The
 two major DSTs exposed by the language are:
 
 - trait objects `dyn Trait`

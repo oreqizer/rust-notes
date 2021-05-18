@@ -23,7 +23,7 @@ Overview of Rust's main constructs and conventions.
 * **enums** define _variants_ of types, `Result<T, E>` and its `Ok(T)`, `Err(E)`
 * **generics** allow parameters of different types `Vec<T>`
 * **traits** define behavior that types have like `ToString`
-* **DSTs** are types with size not known at compile time, `dyn Trait`, `[T]`
+* **DSTs** are types with size not known at compile-time, `dyn Trait`, `[T]`
   , `str`
 * **lifetimes** ensure data validity, `'static`,`'a`
 * **closures** are anonymous functions that capture their context, `|x| x * 2`

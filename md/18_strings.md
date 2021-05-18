@@ -73,10 +73,22 @@ fn main() {
 Note that the `len` method returns the number of _bytes_ of a string, not
 _chars_.
 
+## Escaping
+
+_TODO_ `/`, `r""`, `b""`, `br""`, Unicode and stuff
+
 ## Formatting
 
-While concatenating can be done using the `+` operator, a more readable way that
-also allows more complex formatting is using the `format!` macro:
+Concatenating can be done using the `+` operator:
+
+```rust
+fn main() {
+    let s = "top".to_string();
+    println!("{}", s + "kek"); // topkek
+}
+```
+
+More complex formatting can be done using the `format!` macro:
 
 ```rust
 fn main() {
@@ -84,4 +96,33 @@ fn main() {
 }
 ```
 
-_TODO_
+### Styles
+
+The formatting syntax has the form `{<position>:<format>}`. It is verified at
+compile-time.
+
+The `<position>` part can be the argument position, or a named argument:
+
+```rust
+fn main() {
+    println!("Rofl {}", "lmao");           // implicit position
+    println!("Rofl {0}", "lmao");          // explicit position
+    println!("Rofl {arg}", arg = "lmao");  // named position
+}
+```
+
+The `<format>` part determines which trait to use when formatting:
+
+- nothing for `Display`
+- `?` for `Debug`
+- `o` for `Octal`
+- `x` for `LowerHex`
+- `X` for `UpperHex`
+- `p` for `Pointer`
+- `b` for `Binary`
+- `e` for `LowerExp`
+- `E` for `UpperExp`
+
+_TODO_ add example
+
+Further traits can be added in the future.
