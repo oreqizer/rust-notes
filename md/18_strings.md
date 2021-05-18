@@ -75,7 +75,98 @@ _chars_.
 
 ## Escaping
 
-_TODO_ `/`, `r""`, `b""`, `br""`, Unicode and stuff
+The ``\`` character is used for escaping. To write a literal ``\``, it has to be
+escaped with `\\`. String or character literal delimeters within a literal must
+be escaped:
+
+```rust
+fn main() {
+    println!("backslash: \\");
+    println!("chars: {}", '\'');
+    println!("strings: {}", "\"");
+}
+```
+
+Escaping can be used for writing _bytes_ by their hexadecimal value, or _Unicode
+code points_:
+
+```rust
+fn main() {
+    println!("how about \x74\x68\x65\x20\x67\x61\x6d\x65");  // bytes
+    println!("Unicode char U+211D is \u{211D}");             // Unicode
+}
+```
+
+Escaping allows writing _multiline strings_ with escaped whitespace:
+
+```rust
+fn main() {
+    let s = "Did your \
+    mother fuck \
+    a snowman?";
+
+    println!("{}", s);
+}
+```
+
+### Raw strings
+
+Useful when no escaping at all is desired. They can be declared using `r""` and
+optionally an arbitrary number of `#` pairs outside of `""`, depending on
+whether `"` is in the string and how many `#` characters are used within the
+string:
+
+```rust
+fn main() {
+    let raw = r"nope: \u{211D}, nope: \x67\x61\x6d\x65";
+    let raw = r#"even more "nope" here"#;
+    let raw = r###"nope #nope ##nope"###;
+}
+```
+
+### Byte strings
+
+Strings of bytes that are mostly text are created using `b""` and are stored
+as an array of type `[u8; N]`:
+
+```rust
+fn main() {
+    let bytes = b"raw bytes amirite?"; // type &[u8; 18]
+}
+```
+
+They allow escaping the same way as regular strings, except for Unicode code
+points:
+
+```rust
+fn main() {
+    let bytes = b"the \x67\x61\x6d\x65 again lmao";  // ok
+    // let bytes = b"nope \u{211D}";                 // nope 🙀
+}
+```
+
+Byte strings don't have to be a valid UTF-8:
+
+```rust
+use std::str;
+
+fn main() {
+    let shift_jis = b"\x82\xe6\x82\xa8\x82\xb1\x82\xbb"; // "ようこそ" in SHIFT-JIS
+
+    match str::from_utf8(shift_jis) {
+        Ok(s) => println!("Like that's ever going to happen: {}", s),
+        Err(e) => println!("Told ya: {}", e),
+    };
+}
+```
+
+They can be made _raw_ the same way as regular strings:
+
+```rust
+fn main() {
+    let rbs = br##"hashtag #raw "strings" amirite?"##; // type &[u8; 31]
+}
+```
 
 ## Formatting
 
@@ -98,7 +189,8 @@ fn main() {
 
 ### Styles
 
-The formatting syntax has the form `{<position>:<format>}`. It is verified at
+The formatting syntax has the form `{<position>:<format>}`, both parts being
+optional. When none are supplied also the `:` can be omitted. It is verified at
 compile-time.
 
 The `<position>` part can be the argument position, or a named argument:
@@ -123,6 +215,14 @@ The `<format>` part determines which trait to use when formatting:
 - `e` for `LowerExp`
 - `E` for `UpperExp`
 
-_TODO_ add example
+```rust
+fn main() {
+    println!("{:?}", 1337);  // debug
+    println!("{:b}", 1337);  // binary
+    println!("{:X}", 1337);  // upper-case hexadecimal
+
+    println!("1337 = {leet:X}, 420 = {:?}", 420, leet = 1337);  // mishmash
+}
+```
 
 Further traits can be added in the future.
