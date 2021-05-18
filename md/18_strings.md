@@ -126,8 +126,8 @@ fn main() {
 
 ### Byte strings
 
-Strings of bytes that are mostly text are created using `b""` and are stored
-as an array of type `[u8; N]`:
+Strings of bytes that are mostly text are created using `b""` and are stored as
+an array of type `[u8; N]`:
 
 ```rust
 fn main() {
