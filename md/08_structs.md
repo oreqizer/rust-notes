@@ -46,6 +46,21 @@ fn main() {
 }
 ```
 
+Fields with the same name as an existing binding in the current scope can use
+the shorthand syntax for field assignment:
+
+```rust
+fn main() {
+    let username = String::from("xxx_BILLY_xxx");
+    
+    let user1 = User {
+        username, // username: username
+        email: String::from("blaze@michael.it"),
+        credits: 0,
+    };
+}
+```
+
 Creating new structures from existing ones can be done using destructuring with
 the `..` syntax:
 

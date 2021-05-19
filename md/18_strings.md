@@ -47,7 +47,7 @@ Individual characters take up more space than strings, because `char` is always
 
 ## Indexing
 
-Indexing strings is thus ambiguous, because it is not clear whether _bytes_ or
+Indexing strings is ambiguous, because it is not clear whether _bytes_ or
 _chars_ are being indexed. For this reason, indexing strings is done explicitly
 via:
 
