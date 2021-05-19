@@ -43,6 +43,17 @@ fn main() {
 }
 ```
 
+Bound literals can _shadow_ names:
+
+```rust
+fn main() {
+    let n = Some(5);
+    if let Some(n) = n {
+        println!("got Some({})", n);
+    };
+}
+```
+
 A catch-all placeholder can be specified using `_`:
 
 ```rust
@@ -51,6 +62,17 @@ fn main() {
     match n {
         1..=10 => prinln!("one to ten"),
         _ => println!("some irrelevant number"),
+    };
+}
+```
+
+Destructuring is recursive:
+
+```rust
+fn main() {
+    let x = Some(((13, 37), 15, "omg"));
+    if let Some(((x, y), ..)) = x {
+        println!("x = {}, y = {}", x, y);
     };
 }
 ```
@@ -161,8 +183,60 @@ fn main() {
 
 ## Guards
 
-_TODO_ `if` in `match`
+Match _guards_ are created using the `if` keyword and a boolean expression:
+
+```rust
+fn main() {
+    let pair = (2, -2);
+    match pair {
+        (x, y) if x == y => println!("same numbers"),
+        (x, y) if x + y == 0 => println!("opposites"),
+        (x, _) if x % 2 == 1 => println!("odd first"),
+        _ => println!("something different"),
+    }
+}
+```
+
+## Or
+
+Multiple patterns can be matched using `|`:
+
+```rust
+fn main() {
+    let s = "lol";
+    let cnd = false;
+    match s {
+        "lol" | "kek" | "bur" => println!("lmao"),
+        "omg" | "wtf" if cnd => println!("conditional or"),
+        _ => println!("shrug"),
+    };
+}
+```
 
 ## Binding
 
-_TODO_ `@` in `match`
+Matched literals can be bound to a name using the `@` symbol:
+
+```rust
+fn main() {
+    let n = 5;
+    match n {
+        x @ 0 => println!("zero"),
+        x @ 1..=10 => println!("one to ten, got {}" x),
+        _ => println!("something different"),
+    };
+}
+```
+
+## Unused names
+
+Bound names starting with `_` are not checked as _unused_ by the compiler:
+
+```rust
+fn main() {
+    let _x = 5; // whatever
+    match x_ {
+        _y => println!("so what: {}", _y),
+    };
+}
+```
