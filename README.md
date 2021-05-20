@@ -26,11 +26,10 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 16. [Iterators](md/16_iterators.md)
 17. [Collections](md/17_collections.md)
 18. [Strings](md/18_strings.md)
+19. [Patterns](md/19_patterns.md)
 
 _TODO_
 
-18. String formatting
-19. Patterns (+ `_`)
 20. Modules (Workspaces)
 21. Tests (docs)
 22. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
