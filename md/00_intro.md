@@ -7,11 +7,13 @@
 - zero-cost abstractions
 - non-nullable references
 
-## Language
+Install Rust via `rustup`, which installs all Rust tools and `cargo` — Rust's
+official package manager and orchestration tool.
 
-Overview of Rust's main constructs and conventions.
+For a playground during learning, run `cargo new playground`, edit `main.rs` and
+run by `cargo run` in the project root directory.
 
-### Constructs
+## Constructs
 
 * **primitives** like `i32`, `f64`, `bool`
 * **arrays** are fixed-size collections of values of the same type, `[i32; 100]`
@@ -31,56 +33,13 @@ Overview of Rust's main constructs and conventions.
   procedural, `println!("a macro")`
   or `#[derive(Debug)]`
 
-### Comments
+## Comments
 
 Comments are specified after `//`. No special multiline syntax.
 
-### Conventions
+## Conventions
 
 * `snake_case` for _functions_, _variables_, _macros_ and _lifetimes_
 * `PascalCase` for _enums_, _structs_, _generics_ and _traits_
 * `SCREAMING_SNAKE_CASE` for _constants_ and _statics_
 * `_` or identifiers starting with `_` are _placeholders_
-
-## Setup
-
-* install `rustup`
-* use `cargo` for development
-
-### Binary
-
-`cargo new <name>`
-
-Generates:
-
-```
-src/
-  main.rs
-Cargo.lock
-Cargo.toml
-```
-
-### Library
-
-`cargo new --lib <name>`
-
-Generates:
-
-```
-src/
-  lib.rs
-Cargo.lock
-Cargo.toml
-```
-
-Can also have CLI in `src/main.rs`.
-
-### Scripts
-
-* `cargo test` runs tests
-* `cargo fmt` formats source code
-* `cargo run` runs `src/main.rs`
-* `cargo build` builds the development version
-* `cargo build --release` builds the production version
-* `cargo doc` generates documentation
-* `cargo publish` publishes a library
