@@ -28,10 +28,10 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 18. [Strings](md/18_strings.md)
 19. [Patterns](md/19_patterns.md)
 20. [Modules](md/20_modules.md)
+21. [Cargo](md/21_cargo.md)
 
 _TODO_
 
-21. Cargo (+Workspaces)
 22. Tests (docs)
 23. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
 24. Threads
