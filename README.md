@@ -27,15 +27,13 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 17. [Collections](md/17_collections.md)
 18. [Strings](md/18_strings.md)
 19. [Patterns](md/19_patterns.md)
+20. [Modules](md/20_modules.md)
 
 _TODO_
 
-20. Modules (Workspaces)
-21. Tests (docs)
-22. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
-23. Threads
-24. Unsafe
-25. Macros
-
-- mention [this](https://doc.rust-lang.org/rust-by-example/custom_types/enum/enum_use.html) in _modules_
-- go thru **Rust by example** and pick up missing info
+21. Cargo (+Workspaces)
+22. Tests (docs)
+23. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
+24. Threads
+25. Unsafe
+26. Macros
