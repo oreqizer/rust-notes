@@ -7,6 +7,7 @@ Overview of the most common commands:
 
 - `cargo new <name>` creates a new _binary_ project
 - `cargo new --lib <name>` creates a new _library_ project
+- `cargo install <dep>` installs a dependency
 - `cargo fmt` formats source code
 - `cargo test` runs tests
 - `cargo run` runs a binary, `src/main.rs` by default
@@ -46,8 +47,8 @@ The `Cargo.toml` file specifies the project's _version_ and _dependencies_. The
 common convention is following _SemVer_ for versioning.
 
 Specifying a verion number as a crate version downloads the library
-from [Crates.io](https://crates.io). Fetching a specific _Git_ repository or
-a _file path_:
+from [Crates.io](https://crates.io). Fetching a specific _Git_ repository or a _
+file path_:
 
 ```toml
 [package]
@@ -94,3 +95,56 @@ The file name can be adjusted in `Cargo.toml`:
 [package]
 build = "build.rs"
 ```
+
+## Workspaces
+
+Growing projects can be assembled in the form of _workspaces_. Specifying
+workspaces is done by creating a root `Cargo.toml` file:
+
+```toml
+[workspace]
+members = [
+    # ...
+]
+```
+
+In this folder, create members by `cargo run` and add their names to
+the `members` array in root `Cargo.toml`. The structure looks something like:
+
+```
+app/
+  src/
+    main.rs
+  Cargo.lock
+  Cargo.toml
+utils/
+  src/
+    lib.rs
+  Cargo.lock
+  Cargo.toml
+Cargo.toml
+```
+
+The root `Cargo.toml`:
+
+```toml
+[workspace]
+members = [
+    "app",
+    "utils",
+]
+```
+
+To import `utils` into `app`, specify a relative path
+in `app/Cargo.toml`:
+
+```toml
+[depencencies]
+utils = { path = "../utils" }
+```
+
+Commands are meant to be run directly in the _root of the project_, such as
+`cargo test` or `cargo build`.
+
+Some commands like `cargo run` require the `-p` flag that specifies which
+project to run the command on, like `cargo run -p app`.
