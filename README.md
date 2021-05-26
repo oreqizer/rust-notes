@@ -33,7 +33,8 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 _TODO_
 
 22. Tests (docs)
-23. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
-24. Threads
-25. Unsafe
-26. Macros
+23. Attributes
+24. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
+25. Threads
+26. Unsafe
+27. Macros

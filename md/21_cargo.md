@@ -7,8 +7,9 @@ Overview of the most common commands:
 
 - `cargo new <name>` creates a new _binary_ project
 - `cargo new --lib <name>` creates a new _library_ project
-- `cargo install <dep>` installs a dependency
+- `cargo install <crate>` installs a dependency from [Crates.io](https://crates.io)
 - `cargo fmt` formats source code
+- `cargo fix` fixes source code based on compiler hints
 - `cargo test` runs tests
 - `cargo run` runs a binary, `src/main.rs` by default
 - `cargo build` builds the development version
