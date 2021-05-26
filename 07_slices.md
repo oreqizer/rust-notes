@@ -14,7 +14,7 @@ fn main() {
 
 This is how slices are stored in memory:
 
-![Slice in memory](../assets/string_slice.svg)
+![Slice in memory](assets/string_slice.svg)
 
 ## Range
 

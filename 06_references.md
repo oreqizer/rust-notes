@@ -16,7 +16,7 @@ fn string_length(s: &String) -> usize {
 
 Reference to a fat pointer to a value stored on the heap:
 
-![Reference to a fat pointer](../assets/string_ptr_ref.svg)
+![Reference to a fat pointer](assets/string_ptr_ref.svg)
 
 References are _immutable_ by default. Only mutable variables can be borrowed as
 mutable. Use `&mut` to make a reference _mutable_:

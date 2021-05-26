@@ -76,7 +76,7 @@ fn print_kek() {
 
 This is how a `String` fat pointer looks like:
 
-![String pointer](../assets/string_ptr.svg)
+![String pointer](assets/string_ptr.svg)
 
 ## Moving
 
