@@ -1,9 +1,11 @@
 # Rust
 
-Notes I take during learning **Rust** from [The Rust book](https://doc.rust-lang.org/stable/book/)
+Notes I take during learning **Rust**
+from [The Rust book](https://doc.rust-lang.org/stable/book/)
 and [Rust by example](https://doc.rust-lang.org/rust-by-example/). 🦀
 
-Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapters. 🙀
+Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/)
+chapters. 🙀
 
 ## Topics
 
@@ -26,15 +28,12 @@ Later will add [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapter
 16. [Iterators](16_iterators.md)
 17. [Collections](17_collections.md)
 18. [Strings](18_strings.md)
-19. [Patterns](19_patterns.md)
-20. [Modules](20_modules.md)
-21. [Cargo](21_cargo.md)
-22. [Tests](22_tests.md)
-
-_TODO_
-
-23. Attributes
-24. Smart pointers (Box\<T\>, Rc\<T\>, RefCell\<T\>)
+19. [Smart pointers](19_smart_pointers.md)
+20. [Patterns](20_patterns.md)
+21. [Modules](21_modules.md)
+22. [Cargo](22_cargo.md)
+23. [Tests](23_tests.md)
+24. Attributes
 25. Threads
-26. Unsafe
-27. Macros
+26. Macros
+27. Unsafe
