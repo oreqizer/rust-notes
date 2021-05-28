@@ -62,8 +62,8 @@ fn task2(word: &str) -> String {
         }
     }
 
-    let mut res = String::from(word);
-    let mut postfix = String::from("");
+    let mut res = word.to_string();
+    let mut postfix = "".to_string();
     if woveled {
         postfix.push('h');
     } else {
@@ -100,7 +100,7 @@ impl Command {
         }
         if parts.len() == 2 {
             if parts[0] == "List" {
-                let department = String::from(parts[1]);
+                let department = parts[1].to_string();
 
                 return Some(Command::List(Some(department)));
             }
@@ -108,10 +108,10 @@ impl Command {
         }
         if parts.len() == 4 {
             if parts[0] != "Add" && parts[2] != "to" {
-                return None
+                return None;
             }
-            let person = String::from(parts[1]);
-            let department = String::from(parts[3]);
+            let person = parts[1].to_string();
+            let department = parts[3].to_string();
 
             return Some(Command::Add(department, person));
         }

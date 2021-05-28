@@ -5,7 +5,7 @@ in a collection rather than the whole collection:
 
 ```rust
 fn main() {
-    let s = String::from("hello world");
+    let s = "hello world".to_string();
 
     let hello = &s[..5];
     let world = &s[6..];
@@ -66,11 +66,11 @@ allows passing both raw values and more abstract data types:
 
 ```rust
 fn main() {
-    let s = after_n(3, "lolkekbur");                 // &str string literal slice directly
-    let s = after_n(3, &String::from("lolkekbur"));  // Deref-coerced &String -> &str
+    let s = after_n(3, "lolkekbur");               // &str string literal slice directly
+    let s = after_n(3, &"lolkekbur".to_string());  // Deref-coerced &String -> &str
 
-    let (x, y) = split_half(&[1, 2, 3, 4]);          // &[i32] array slice directly
-    let (x, y) = split_half(&vec![1, 2, 3, 4]);      // Deref-coerced &Vec<T> -> &[i32]
+    let (x, y) = split_half(&[1, 2, 3, 4]);        // &[i32] array slice directly
+    let (x, y) = split_half(&vec![1, 2, 3, 4]);    // Deref-coerced &Vec<T> -> &[i32]
 }
 
 fn after_n(n: usize, s: &str) -> &str {
@@ -87,7 +87,7 @@ fn split_half(a: &[i32]) -> (&[i32], &[i32]) {
 
 ```rust
 fn main() {
-    let word = String::from("lolkekbur");
+    let word = "lolkekbur".to_string();
 
     let s = after_n(3, &word[..]);  // is the explicit form
     let s = after_n(3, &word);      // turns into &word[..]

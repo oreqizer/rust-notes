@@ -37,7 +37,7 @@ Traits can have a default implementation:
 ```rust
 trait Summary {
     fn summarize(&self) -> String {
-        String::from("Summarized...")
+        "Summarized...".to_string()
     }
 }
 
@@ -364,13 +364,13 @@ struct Dog;
 
 impl Dog {
     fn baby_name() -> String {
-        String::from("Spot")
+        "Spot".to_string()
     }
 }
 
 impl Animal for Dog {
     fn baby_name() -> String {
-        String::from("puppy")
+        "puppy".to_string()
     }
 }
 

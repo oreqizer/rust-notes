@@ -5,7 +5,7 @@ to the data. Taking a reference to a value is called _borrowing_.
 
 ```rust
 fn main() {
-    let s = String::from("kek");
+    let s = "kek".to_string();
     println!("Length is {}", string_length(&s));
 }
 
@@ -23,7 +23,7 @@ mutable. Use `&mut` to make a reference _mutable_:
 
 ```rust
 fn main() {
-    let mut s = String::from("top");
+    let mut s = "top".to_string();
     append_kek(&mut s); // s is now topkek
 }
 
@@ -67,12 +67,12 @@ fn gimme_primitive() -> i32 {
 
 // OK, ownership moved
 fn gimme_pointer() -> String {
-    String::from("yep")
+    "yep".to_string()
 }
 
 // Error!
 fn bad_function() -> &String {
-    let s = String::from("nope");
+    let s = "nope".to_string();
     &s // compilation error!
 }  // s no longer valid here, cannot return from the function
 ```

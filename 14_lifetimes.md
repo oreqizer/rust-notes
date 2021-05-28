@@ -48,10 +48,10 @@ fn gimme_bigger<'a>(s1: &'a str, s2: &'a str) -> &'a str {
 }
 
 fn main() {
-    let s1 = String::from("kekega");   // --------+- 'a
+    let s1 = "kekega".to_string();     // --------+- 'a
     let res;                           //         |
     {                                  //         |
-        let s2 = String::from("bur");  // --+- 'b |
+        let s2 = "bur".to_string();    // --+- 'b |
         res = gimme_bigger(&s1, &s2);  //   |     | res has lifetime 'b
     }                                  // --+     | 
     // println!("bigger is {}", res);  //         | nope 😿 'b is invalid

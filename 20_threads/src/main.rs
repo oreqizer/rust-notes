@@ -49,7 +49,7 @@ fn main_channel() {
     let (tx, rx) = mpsc::channel();
 
     thread::spawn(move || {
-        let val = String::from("hi");
+        let val = "hi".to_string();
         tx.send(val).unwrap();
     });
 
@@ -62,10 +62,10 @@ fn main_channel_iter() {
 
     thread::spawn(move || {
         let vals = vec![
-            String::from("hi"),
-            String::from("from"),
-            String::from("the"),
-            String::from("thread"),
+            "hi".to_string(),
+            "from".to_string(),
+            "the".to_string(),
+            "thread".to_string(),
         ];
 
         for val in vals {
@@ -85,10 +85,10 @@ fn main_channel_multiple() {
     let tx1 = tx.clone();
     thread::spawn(move || {
         let vals = vec![
-            String::from("hi"),
-            String::from("from"),
-            String::from("the"),
-            String::from("thread"),
+            "hi".to_string(),
+            "from".to_string(),
+            "the".to_string(),
+            "thread".to_string(),
         ];
 
         for val in vals {
@@ -99,10 +99,10 @@ fn main_channel_multiple() {
 
     thread::spawn(move || {
         let vals = vec![
-            String::from("more"),
-            String::from("messages"),
-            String::from("for"),
-            String::from("you"),
+            "more".to_string(),
+            "messages".to_string(),
+            "for".to_string(),
+            "you".to_string(),
         ];
 
         for val in vals {

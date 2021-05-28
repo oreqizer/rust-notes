@@ -69,7 +69,7 @@ When this variable goes out of scope, its owned resources are freed:
 
 ```rust
 fn print_kek() {
-    let s1 = String::from("hello");  // s1 points to the allocated data
+    let s1 = "hello".to_string();  // s1 points to the allocated data
     println!("{}", s1);
 }                                    // s1 goes out of scope, data freed
 ```
@@ -86,7 +86,7 @@ the pointer is _moved_ and gets a new owner:
 
 ```rust
 fn main() {
-    let s1 = String::from("hello");
+    let s1 = "hello".to_string();
     let s2 = s1; // s1 moved to s2, s1 is no longer valid
 
     gimme_string(s2);
@@ -106,6 +106,6 @@ fn main() {
 }
 
 fn make_string() -> String {
-    String::from("lmao")
+    "lmao".to_string()
 }
 ```

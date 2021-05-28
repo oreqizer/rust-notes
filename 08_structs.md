@@ -25,8 +25,8 @@ all their fields filled:
 ```rust
 fn main() {
     let user1 = User {
-        username: String::from("xxx_BILLY_xxx"),
-        email: String::from("blaze@michael.it"),
+        username: "xxx_BILLY_xxx".to_string(),
+        email: "blaze@michael.it".to_string(),
         credits: 0,
     };
 }
@@ -37,12 +37,12 @@ A structure needs to be marked as `mut` to allow updating values:
 ```rust
 fn main() {
     let mut user1 = User {
-        username: String::from("xxx_BILLY_xxx"),
-        email: String::from("blaze@michael.it"),
+        username: "xxx_BILLY_xxx".to_string(),
+        email: "blaze@michael.it".to_string(),
         credits: 0,
     };
 
-    user1.email = String::from("crash@team.racing");
+    user1.email = "crash@team.racing".to_string();
 }
 ```
 
@@ -51,11 +51,11 @@ the shorthand syntax for field assignment:
 
 ```rust
 fn main() {
-    let username = String::from("xxx_BILLY_xxx");
+    let username = "xxx_BILLY_xxx".to_string();
     
     let user1 = User {
         username, // username: username
-        email: String::from("blaze@michael.it"),
+        email: "blaze@michael.it".to_string(),
         credits: 0,
     };
 }
@@ -69,7 +69,7 @@ fn main() {
     // ...
 
     let user2 = User {
-        username: String::from("_____samo_____"),
+        username: "_____samo_____".to_string(),
         ..user1
     };
 }

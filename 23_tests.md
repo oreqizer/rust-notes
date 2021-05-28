@@ -133,7 +133,7 @@ fn test_blaze_it() -> Result<(), String> {
     let n = blaze_it()?;
     match n {
         420 => Ok(()),
-        _ => Err(String::from("wrong 🙀")),
+        _ => Err("wrong 🙀".to_string()),
     }
 }
 ```

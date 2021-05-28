@@ -28,7 +28,7 @@ or `dyn Trait`:
 use std::fmt::Display;
 
 fn gimme_displayable(num: bool) -> Box<dyn Display> {
-    Box::new(if num { 1337 } else { String::from("yo") })
+    Box::new(if num { 1337 } else { "yo".to_string() })
 }
 ```
 
@@ -71,28 +71,45 @@ fn main() {
 `Weak<T>` is especially useful when dealing with graphs or double linked lists
 where reference cycles are common.
 
-### Arc
+## Cell
 
-Thread safe version of `Rc<T>`, the `Arc<T>`, or _atomic reference counter_,
-implements the `Clone` trait creates a reference poitner to a value on the heap:
+The _interior mutability pattern_ refers to the ability to mutate data referred
+to by immutable references.
+
+The `Cell<T>` type allows _zero-cost_ mutating data for types that implement
+the `Copy` trait:
 
 ```rust
-use std::sync::Arc;
-use std::thread;
+use std::cell::Cell;
 
 fn main() {
-    let swag = Arc::new("swag");
+    let x = Cell::new(4);
+    let y = &x;
 
-    for _ in 0..10 {
-        let swag = Arc::clone(&swag);
-
-        thread::spawn(move || {
-            println!("{:?}", swag); // swag is moved
-        });
-    }
+    y.set(20);
+    println!("x = {}, y = {}", x.get(), y.get()); // x = 20, y = 20
 }
 ```
 
-## RefCell
+The `RefCell<T>` type holds a reference to a type and defers enforcing ownership
+rules at _runtime_:
 
-_TODO_
+```rust
+use std::cell::RefCell;
+
+fn append(s: &RefCell<String>, what: &str) {
+    s.borrow_mut().push_str(what)
+} // borrowed mutable value goes out of scope
+
+fn print(s: &RefCell<String>) {
+    println!("s = \"{}\"", s.borrow());
+} // borrowed value goes out of scope
+
+fn main() {
+    let s = RefCell::new("kek".to_string());
+
+    print(&s); // s = "kek"
+    append(&s, "ega");
+    print(&s); // s = "kekega"
+}
+```
