@@ -29,9 +29,10 @@ run by `cargo run` in the project root directory.
   , `str`
 * **lifetimes** ensure data validity, `'static`,`'a`
 * **closures** are anonymous functions that capture their context, `|x| x * 2`
+* **attributes** are metadata for crates, modules or items, `#[attr]`
+  , `#![crate_attr]`
 * **macros** for metaprogramming, declarative and
-  procedural, `println!("a macro")`
-  or `#[derive(Debug)]`
+  procedural, `println!("a macro")` or `#[derive(Debug)]`
 
 ## Comments
 

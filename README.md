@@ -33,7 +33,7 @@ chapters. 🙀
 21. [Modules](21_modules.md)
 22. [Cargo](22_cargo.md)
 23. [Tests](23_tests.md)
-24. Attributes
+24. [Attributes](24_attributes.md)
 25. Threads
 26. Macros
 27. Unsafe
