@@ -15,7 +15,7 @@ impl<T> Point<T> {
 }
 ```
 
-The compiler substitutes these placeholders for concrete types on compile-time.
+The compiler substitutes these placeholders for concrete types at compile-time.
 
 ## Turbofish
 
@@ -28,9 +28,12 @@ fn main() {
 }
 ```
 
+This is useful in case the compiler cannot infer the type, or you want to change
+the inferred type to something different.
+
 ## Defaults
 
-The type can be defaulted using the `T=Default` syntax:
+The type can be defaulted using the `T = Default` syntax:
 
 ```rust
 struct Point<T = u64>(T, T);
@@ -41,13 +44,30 @@ fn main() {
 }
 ```
 
+## Constants
+
+The so-called `const` generics allow using _constant values_ as generic
+parameters:
+
+```rust
+struct Matrix<const S: usize>([[i32; S]; S]);
+
+type Matrix3D = Matrix<3>;
+
+fn main() {
+    let m: Matrix3D = Matrix([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
+}
+```
+
+They're defined using the `const T: type` syntax.
+
 ## Associated type
 
 Associated types are a type of generics whose purpose is to simplify code
 management.
 
-> Code using the associated type can be replaced with code using the
-> generic type, but not the other way around.
+> Code using the associated type can be replaced with code using the generic
+> type, but not the other way around.
 
 Associated type is specified using `type` in the `impl` block and can be
 accessed with `::`:

@@ -32,8 +32,8 @@ fn main() {
 
 ## Result
 
-The `Result<T, E>` enum is for operations that can fail and contains either a _
-value_ or an _error_:
+The `Result<T, E>` enum is for operations that can fail and contains either a
+_value_ or an _error_:
 
 ```rust
 enum Result<T, E> {
