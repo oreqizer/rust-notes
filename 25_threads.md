@@ -1,7 +1,7 @@
 # Threads
 
-Rust has a _1:1 thread system_ — every thread is a physical thread managed by the
-OS. Thread is spawned using `thread::spawn`:
+Rust has a _1:1 thread system_ — every thread is a physical thread managed by
+the OS. Thread is spawned using `thread::spawn`:
 
 ```rust
 use std::thread;
@@ -31,7 +31,51 @@ fn main() {
 
 ## Channels
 
-_TODO_
+Channels send data from multiple threads into a single consuming thread to
+process the results:
+
+```rust
+use std::sync::mpsc; // multiple producers single consumer
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    thread::spawn(move || {
+        tx.send("swag").unwrap();
+    });
+
+    let r = rx.recv().unwrap();
+    println!("yolo {}", r);
+}
+```
+
+The `rx` receiver can also be used as an _iterator_.
+
+The _transmitter_ `tx` needs to be cloned to be used in multiple threads:
+
+```rust
+use std::sync::mpsc;
+use std::thread;
+
+fn main() {
+    let (tx, rx) = mpsc::channel();
+
+    (1..10)
+        .map(|x| {
+            let tx = tx.clone();
+            thread::spawn(move || {
+                tx.send(x).unwrap();
+            })
+        })
+        .for_each(|h| h.join().unwrap());
+
+    drop(tx); // rx waits until all clones of tx are dropped
+    for r in rx {
+        println!("{}", r);
+    }
+}
+```
 
 ## The `Sync` trait
 
