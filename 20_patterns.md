@@ -235,8 +235,5 @@ Bound names starting with `_` are not checked as _unused_ by the compiler:
 ```rust
 fn main() {
     let _x = 5; // whatever
-    match x_ {
-        _y => println!("so what: {}", _y),
-    };
 }
 ```
