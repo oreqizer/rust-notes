@@ -34,8 +34,8 @@ fn gimme_bigger<'a>(s1: &'a str, s2: &'a str) -> &'a str {
 In this case, references `s1` and `s2` may have different lifetimes, and it is
 impossible to determine the returned reference's lifetime at compile-time.
 
-When a lifetime-parameter is used on multiple references, the compiler choses _
-the shortest lifetime_ of all to ensure that the returned reference lives long
+When a lifetime-parameter is used on multiple references, the compiler choses
+_the shortest lifetime_ of all to ensure that the returned reference lives long
 enough:
 
 ```rust
@@ -53,9 +53,9 @@ fn main() {
     {                                  //         |
         let s2 = "bur".to_string();    // --+- 'b |
         res = gimme_bigger(&s1, &s2);  //   |     | res has lifetime 'b
-    }                                  // --+     | 
+    }                                  // --+     |
     // println!("bigger is {}", res);  //         | nope 😿 'b is invalid
-}                                      // --------+ 
+}                                      // --------+
 ```
 
 The `res` reference has the shorter lifetime `'b`. When used in the `println!`
@@ -159,8 +159,8 @@ impl<'a> Text<'a> {
 The `'static` lifetime is the _subtype_ of all other lifetimes — it lives for
 the entire duration of the program.
 
-The most notable example is _string literals_, whose full type
-is `&'static str`:
+The most notable example is _string literals_, whose full type is
+`&'static str`:
 
 ```rust
 fn gimme_bigger<'a>(s1: &'a str, s2: &'a str) -> &'a str {
