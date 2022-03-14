@@ -82,3 +82,17 @@ fn add_two(x: i32) -> i32 {
     do_twice(add_one, x)
 }
 ```
+
+## Const functions
+
+Functions that only operate with arguments and operations performable at
+_compile-time_ can be marked as `const fn` and used in such contexts:
+
+```rust
+const X: i32 = 1337;
+const X_TWO: i32 = double(X); // 2674
+
+const fn double(x: i32) -> i32 {
+    x * 2
+}
+```
