@@ -35,6 +35,6 @@ chapters. 🙀
 23. [Tests](23_tests.md)
 24. [Attributes](24_attributes.md)
 25. [Threads](25_threads.md)
-26. Macros
-27. Unsafe
-28. FFI
+26. [Macros](26_macros.md)
+27. [Unsafe](27_unsafe.md)
+28. [FFI](28_ffi.md)
