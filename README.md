@@ -34,7 +34,7 @@ chapters. 🙀
 22. [Cargo](22_cargo.md)
 23. [Tests](23_tests.md)
 24. [Attributes](24_attributes.md)
-25. Threads
+25. [Threads](25_threads.md)
 26. Macros
 27. Unsafe
 28. FFI
