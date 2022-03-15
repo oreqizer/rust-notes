@@ -110,9 +110,42 @@ When expanding, the same kind and nesting must be used than when matching. When
 expanding multiple matchers in one repetition, their number of fragments must be
 the same.
 
-### Overload
+### Matching
 
-_TODO_
+Macro pattern matching allows _multiple signatures_ and _recursion_:
+
+```rust
+macro_rules! find_min {
+    ($x:expr) => ($x);
+    ($x:expr, $($y:expr),+) => (
+        std::cmp::min($x, find_min!($($y),+))
+    )
+}
+
+fn main() {
+    println!("{}", find_min!(1));
+    println!("{}", find_min!(1 + 2, 2));
+    println!("{}", find_min!(5, 2 * 3, 4));
+}
+```
+
+Arbitrary argument separators can be matched as well:
+
+```rust
+macro_rules! assert_many {
+    ($($next:expr),*; one $msg:tt) => {
+        assert!(false $(|| $next)*, stringify!($msg));
+    };
+    ($($next:expr),*; all $msg:tt) => {
+        assert!(true $(&& $next)*, stringify!($msg));
+    };
+}
+
+fn main() {
+    assert_many!(2 == 2, 5 > 8; one "one is enough");
+    assert_many!(2 == 2, 5 < 8; all "all must pass");
+}
+```
 
 ## Procedural macros
 
