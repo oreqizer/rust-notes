@@ -3,6 +3,8 @@
 Rust's way of metaprogramming. Macros allow _compile-time_ code generation that
 generates source code based on supplied parameters.
 
+See [tlborm](https://veykril.github.io/tlborm/) for details on macros!
+
 ## Declarative macros
 
 Macros that utilize
@@ -129,7 +131,7 @@ fn main() {
 }
 ```
 
-Arbitrary argument separators can be matched as well:
+Arbitrary lexical tokens can be matched:
 
 ```rust
 macro_rules! assert_many {
@@ -149,4 +151,4 @@ fn main() {
 
 ## Procedural macros
 
-_TODO_
+_TODO_ https://doc.rust-lang.org/book/ch19-06-macros.html#procedural-macros-for-generating-code-from-attributes
