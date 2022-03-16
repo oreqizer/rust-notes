@@ -114,7 +114,8 @@ the same.
 
 ### Matching
 
-Macro pattern matching allows _multiple signatures_ and _recursion_:
+Macro pattern matching is done against lexical tokens and allows _multiple
+signatures_ and _recursion_:
 
 ```rust
 macro_rules! find_min {
@@ -131,7 +132,7 @@ fn main() {
 }
 ```
 
-Arbitrary lexical tokens can be matched:
+Arbitrary tokens can be matched:
 
 ```rust
 macro_rules! assert_many {
@@ -151,4 +152,54 @@ fn main() {
 
 ## Procedural macros
 
-_TODO_ https://doc.rust-lang.org/book/ch19-06-macros.html#procedural-macros-for-generating-code-from-attributes
+_Procedural macros_ are functions that take `TokenStream` input and output a
+modified `TokenStream`. There are three kinds:
+
+- Function-like macros - `custom!(...)`
+- Derive macros - `#[derive(Custom)]`
+- Attribute macros - `#[custom]`
+
+Procedural macros have to be defined in a separate crate with the following
+field in `Cargo.toml`:
+
+```toml
+[lib]
+proc-macro = true
+```
+
+### Function-like macros
+
+These macros are invoked with the `custom!()` syntax. They're defined using the
+`#[proc_macro]` attribute:
+
+```rust
+// custom_macros crate
+use proc_macro::TokenStream;
+
+#[proc_macro]
+pub fn custom(_input: TokenStream) -> TokenStream {
+    // normally you'd modify input here and return the result
+    r#"fn yolo() -> &'static str { "swag" }"#.parse().unwrap()
+}
+```
+
+You then include it as a dependency in your regular crate and use it:
+
+```rust
+// your regular crate
+use custom_macros::custom;
+
+custom!();
+
+fn main() {
+    println!("yolo {}", yolo()); // yolo swag
+}
+```
+
+### Derive macros
+
+_TODO_
+
+### Attribute macros
+
+_TODO_
