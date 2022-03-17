@@ -198,7 +198,84 @@ fn main() {
 
 ### Derive macros
 
-_TODO_
+_Derive macros_ define inputs for the `#[derive(...)]` attribute. They can be
+applied on `struct`, `enum` or `union` token streams:
+
+```rust
+// custom_macros crate
+use proc_macro::TokenStream;
+use quote::quote;
+use syn;
+
+#[proc_macro_derive(Blaze)]
+pub fn blaze_derive(input: TokenStream) -> TokenStream {
+    let ast: syn::DeriveInput = syn::parse(input).unwrap();
+
+    let name = &ast.ident;
+    let gen = quote! {
+        impl Blaze for #name {
+            fn it() {
+                println!("🔥");
+            }
+        }
+    };
+    gen.into()
+}
+```
+
+The macro only needs the trait's _name_, it does not need to actually be in
+scope when defining the macro function.
+
+Bringing the derive trait's name into scope applies the macro:
+
+```rust
+// your regular crate
+use custom_macros::Blaze;
+
+pub trait Blaze {
+    fn it();
+}
+
+#[derive(Blaze)]
+struct Snoop;
+
+fn main() {
+    Snoop::it(); // 🔥
+}
+```
+
+Derive macros can define _helper attributes_:
+
+```rust
+use proc_macro::TokenStream;
+
+#[proc_macro_derive(Custom, attributes(custom))]
+pub fn custom_derive_attr(input: TokenStream) -> TokenStream {
+    println!("input = {}", input.to_string());
+    TokenStream::new()
+}
+```
+
+These are _inert_ and can be specified on items as additional information:
+
+```rust
+use procs::Custom;
+
+pub trait Custom {
+    fn it();
+}
+
+// will print during compilation:
+// input = struct Struct { #[custom] field : u32 }
+#[derive(Custom)]
+struct Struct {
+    #[custom] field: u32
+}
+
+fn main() {
+    let _s = Struct{ field: 5 };
+}
+```
 
 ### Attribute macros
 
