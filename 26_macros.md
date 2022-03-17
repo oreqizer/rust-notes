@@ -303,7 +303,7 @@ use custom_macros::print_tokens;
 // attr: GET, "/:id"
 // item: fn get_username(id : u8) -> String { "xxx_bobby_xxx".to_string() }
 #[print_tokens(GET, "/:id")]
-fn get_username(id: u8) -> String {
+fn get_username(_id: u8) -> String {
     "xxx_bobby_xxx".to_string()
 }
 ```
