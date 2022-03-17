@@ -247,6 +247,7 @@ fn main() {
 Derive macros can define _helper attributes_:
 
 ```rust
+// custom_macros crate
 use proc_macro::TokenStream;
 
 #[proc_macro_derive(Custom, attributes(custom))]
@@ -259,24 +260,50 @@ pub fn custom_derive_attr(input: TokenStream) -> TokenStream {
 These are _inert_ and can be specified on items as additional information:
 
 ```rust
-use procs::Custom;
+// your regular crate
+use custom_macros::Custom;
 
 pub trait Custom {
     fn it();
 }
 
-// will print during compilation:
+// prints during compilation:
 // input = struct Struct { #[custom] field : u32 }
 #[derive(Custom)]
 struct Struct {
     #[custom] field: u32
 }
-
-fn main() {
-    let _s = Struct{ field: 5 };
-}
 ```
 
 ### Attribute macros
 
-_TODO_
+_Attribute macros_ define new outer attributes using the
+`#[proc_macro_attribute]` attribute. They take the _attribute token stream_ and
+the _item token stream_ as arguments:
+
+```rust
+// custom_macros crate
+use proc_macro::TokenStream;
+
+#[proc_macro_attribute]
+pub fn print_tokens(attr: TokenStream, item: TokenStream) -> TokenStream {
+    println!("attr: {}", attr.to_string());
+    println!("item: {}", item.to_string());
+    item
+}
+```
+
+Attribute macros can take arbitrary arguments to adjust their behavior:
+
+```rust
+// custom_macros regular crate
+use custom_macros::print_tokens;
+
+// prints during compilation:
+// attr: GET, "/:id"
+// item: fn get_username(id : u8) -> String { "xxx_bobby_xxx".to_string() }
+#[print_tokens(GET, "/:id")]
+fn get_username(id: u8) -> String {
+    "xxx_bobby_xxx".to_string()
+}
+```
