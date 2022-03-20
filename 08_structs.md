@@ -149,7 +149,7 @@ fn main() {
 
 ## Associated functions
 
-Associated funcitons are defined in an `impl` block and don't use the `self`
+Associated functions are defined in an `impl` block and don't use the `self`
 parameter. They are accessed on the structure name using `::`:
 
 ```rust
