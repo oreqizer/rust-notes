@@ -32,8 +32,8 @@ Arbitrary address can be pointed to:
 
 ```rust
 fn main() {
-    let _shithole = 0x12345 as *const i32;
-    // println!("what is here? {}", *r1); // please don't 🙀
+    let shithole = 0x12345 as *const i32;
+    // println!("what is here? {}", *shithole); // please don't 🙀
 }
 ```
 
