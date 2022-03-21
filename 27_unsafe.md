@@ -37,6 +37,68 @@ fn main() {
 }
 ```
 
- ## Unsafe functions
+## Unsafe functions
 
- _TODO_ calling unsafe fns, creating safe abstractions
+Functions can be marked unsafe using the `unsafe fn` declaration:
+
+```rust
+unsafe fn do_danger() {
+    // ...
+}
+```
+
+Calling unsafe functions is considered unsafe. To use these functions in a safe
+environment, a safe abstraction can be created:
+
+```rust
+use std::slice;
+
+fn split_at_mut<T>(slice: &mut [T], mid: usize) -> (&mut [T], &mut [T]) {
+    let len = slice.len();
+    let ptr = slice.as_mut_ptr();
+
+    assert!(mid <= len);
+
+    unsafe {
+        (
+            // slice::from_raw_parts_mut is an unsafe function
+            slice::from_raw_parts_mut(ptr, mid),
+            slice::from_raw_parts_mut(ptr.add(mid), len - mid),
+        )
+    }
+}
+
+fn main() {
+    let mut s = "420blazeit".chars().collect::<Vec<char>>();
+    let (a, b) = split_at_mut(&mut s, 3);
+
+    println!("a = {:?}", a);
+    println!("b = {:?}", b);
+}
+```
+
+## Unsafe traits
+
+Implementing an `unsafe` trait is considered unsafe:
+
+```rust
+unsafe trait Yolo {
+    //
+}
+
+unsafe impl Yolo for i32 {
+    //
+}
+```
+
+An example of an unsafe trait is creating a trait that holds a type that is not
+`Send` or `Sync` such as a raw pointer, and we want to mark the trait as `Send`
+or `Sync`.
+
+## Mutable static variables
+
+_TODO_
+
+## FFI
+
+_TODO_
