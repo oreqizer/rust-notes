@@ -72,8 +72,8 @@ fn main() {
     let mut s = "420blazeit".chars().collect::<Vec<char>>();
     let (a, b) = split_at_mut(&mut s, 3);
 
-    println!("a = {:?}", a);
-    println!("b = {:?}", b);
+    println!("a = {:?}", a); // a = ['4', '2', '0']
+    println!("b = {:?}", b); // b = ['b', 'l', 'a', 'z', 'e', 'i', 't']
 }
 ```
 
@@ -97,8 +97,32 @@ or `Sync`.
 
 ## Mutable static variables
 
-_TODO_
+Accessing and mutating _mutable static variables_ is unsafe:
+
+```rust
+static mut GLOBAL_ID: i32 = 0;
+
+fn main() {
+    unsafe {
+        GLOBAL_ID += 1;
+        println!("id = {}", GLOBAL_ID);
+    }
+}
+```
 
 ## FFI
 
-_TODO_
+Calling a _foreign function interface_ functions defined in `extern`
+declarations is unsafe:
+
+```rust
+extern "C" {
+    fn abs(input: i32) -> i32;
+}
+
+fn main() {
+    unsafe {
+        println!("abs(-420) according to C is {}", abs(-420));
+    }
+}
+```
