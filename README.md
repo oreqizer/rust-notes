@@ -4,8 +4,13 @@ Notes I take during learning **Rust** from
 [The Rust book](https://doc.rust-lang.org/stable/book/) and
 [Rust by example](https://doc.rust-lang.org/rust-by-example/). 🦀
 
-Later will add [Async](https://rust-lang.github.io/async-book/) and
-[Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) chapters. 🙀
+Further reading:
+
+- [Async](https://rust-lang.github.io/async-book/) for details on asynchronous
+  programming
+- [TLBORM](https://veykril.github.io/tlborm/) for details on macros
+- [Rustonomicon](https://doc.rust-lang.org/stable/nomicon/) for raw guts of the
+  language 🙀
 
 ## Topics
 
@@ -37,6 +42,7 @@ Later will add [Async](https://rust-lang.github.io/async-book/) and
 25. [Threads](25_threads.md)
 26. [Macros](26_macros.md)
 27. [Unsafe](27_unsafe.md)
+28. [Async](28_async.md)
 
 ## Resources
 

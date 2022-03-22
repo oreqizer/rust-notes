@@ -3,8 +3,6 @@
 Rust's way of metaprogramming. Macros allow _compile-time_ code generation that
 generates source code based on supplied parameters.
 
-See [tlborm](https://veykril.github.io/tlborm/) for details on macros!
-
 ## Declarative macros
 
 Macros that utilize
