@@ -43,7 +43,3 @@ Further reading:
 26. [Macros](26_macros.md)
 27. [Unsafe](27_unsafe.md)
 28. [Async](28_async.md)
-
-## Resources
-
-- [The little book of Rust macros](https://veykril.github.io/tlborm/)
