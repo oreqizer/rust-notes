@@ -26,6 +26,10 @@ async fn double_fetched() -> i32 {
 }
 ```
 
+These `async` blocks get compiled to anonymous futures in the form of _finite
+state machines_, which keep track of the future's progress, as well as their
+scope contents.
+
 ## The `Future` trait
 
 Implementing the `Future` trait allows using the `async/await` syntax on a type.
@@ -46,10 +50,10 @@ trait Future {
 }
 ```
 
-The `async/await` syntax gets compiled to a finite state machine that executes
-when the `poll` function is called.
+Futures are executed by calling the `poll` function, which advances them into
+their next state.
 
-When the coroutine executes and needs to wait before proceeding, it returns
+When the coroutine executes and hasn't reached its final state yet, it returns
 `Poll::Pending` and marks itself back to be polled via `cx` when it is ready.
 
 When the coroutine is polled and finishes execution, it returns `Poll::Ready(T)`
@@ -284,7 +288,165 @@ fn main() {
 
 This prints `yolo`, and after two seconds prints `swag`. 🎉
 
+There are many community runtimes available, such as `tokio`, that abstract
+these low level details like implementing custom futures and building custom
+executors.
+
 ## Pinning
+
+By default, all types are _movable_. Primitive types like `i32` are passed
+by-value, while fat pointers like `Box<T>` and `&mut T` allow swapping their
+contents.
+
+The type `Pin<P>` ensures that any _pointee_ of pointer `P` has stable location
+in memory. This is essential for _self-referential types_, which many futures
+are:
+
+```rust,ignore
+async {
+    let mut x = [0; 128];
+    let read_into_buf_fut = read_into_buf(&mut x);
+    read_into_buf_fut.await;
+    println!("{:?}", x);
+}
+```
+
+This compiles down to something like this:
+
+```rust,ignore
+struct ReadIntoBuf<'a> {
+    buf: &'a mut [u8], // points to `x` below
+}
+
+struct AsyncFuture {
+    x: [u8; 128],
+    read_into_buf_fut: ReadIntoBuf<'what_lifetime?>,
+}
+```
+
+In case the future was moved, the `buf` pointer to `x` would suddenly have
+pointed to an unknown location. To prevent this, `AsyncFuture` has to be
+_pinned_ in order for `x` to stay in the same place.
+
+For that reason, the `Future` trait's `poll` function takes a `Pin<&mut Self>`
+as a receiver, ensuring that he future is pinned. This ensures it is not moved,
+for example between threads.
+
+### The `Unpin` trait
+
+Primitive types are always freely movable because they do not require a stable
+address in memory, such as `i32`, `bool` and references, as well as other types
+composed of these types.
+
+Types that do not need pinning implement the `Unpin` auto trait, which cancels
+the effect of `Pin<P>`. For `T: Unpin`, `Pin<Box<T>>` is the same as `Box<T>`,
+same for `Pin<&mut T>` and `&mut T`.
+
+The `Unpin` trait only affects the _pointee_, not the _pointer_. In case of
+`Pin<Box<T>>`, the `T` must be `Unpin`, and not `Box<T>`.
+
+### The `!Unpin` marker
+
+Self-referential types have to be marked as `!Unpin` using
+`std::marker::PhantomPinned`, since they're not movable _without being pinned_:
+
+```rust
+use std::marker::PhantomPinned;
+
+struct Test {
+    text: String,
+    ptr: *const String,
+    _pin: PhantomPinned,
+}
+
+impl Test {
+    fn new(text: &str) -> Self {
+        let mut s = Self {
+            text: text.to_string(),
+            ptr: std::ptr::null(),
+            _pin: PhantomPinned,
+        };
+        s.ptr = &s.text;
+        s
+    }
+
+    fn text(&self) -> &str {
+        &self.text
+    }
+
+    fn ptr(&self) -> &str {
+        unsafe { &*(self.ptr) }
+    }
+}
+
+fn main() {
+    let mut test1 = Test::new("test1");
+    let mut test2 = Test::new("test2");
+
+    println!("{}, {}", test1.text(), test1.ptr()); // test1, test1
+    std::mem::swap(&mut test1, &mut test2);
+    println!("{}, {}", test2.text(), test2.ptr()); // test1, test2
+}
+```
+
+Without pinning, swapping the memory of `test1` and `test2` causes `test2.ptr`
+to suddenly point to a wrong location — the pointer _still_ points to the
+`test1` struct, which already contains the `"test2"` string now.
+
+For this type, operations like `std::mem::swap` are illegal, since they break
+the pointer behavior. To prevent this, `Pin<T>` can be used to pin the `Test`
+object into memory, so the `ptr` pointer will point to the correct location.
+
+### Pinning to the stack
+
+Pinning can be done on the _stack_ directly:
+
+```rust
+use std::marker::PhantomPinned;
+use std::pin::Pin;
+
+struct Test {
+    text: String,
+    ptr: *const String,
+    _pin: PhantomPinned,
+}
+
+impl Test {
+    fn new(text: &str) -> Self {
+        let mut s = Self {
+            text: text.to_string(),
+            ptr: std::ptr::null(),
+            _pin: PhantomPinned,
+        };
+        s.ptr = &s.text;
+        s
+    }
+
+    fn text(self: Pin<&Self>) -> &str {
+        &self.get_ref().text
+    }
+
+    fn ptr(self: Pin<&Self>) -> &str {
+        unsafe { &*(self.ptr) }
+    }
+}
+
+fn main() {
+    let mut test1 = Test::new("test1");
+    let mut test1 = unsafe { Pin::new_unchecked(&mut test1) };
+    let mut test2 = Test::new("test2");
+    let mut test2 = unsafe { Pin::new_unchecked(&mut test2) };
+
+    println!("{}, {}", test1.as_ref().text(), test1.as_ref().ptr());
+    // std::mem::swap(test1.get_mut(), test2.get_mut()); // compilation error 🙀
+    println!("{}, {}", test2.as_ref().text(), test2.as_ref().ptr());
+}
+```
+
+The `std::mem::swap` function can no longer be used, because both `Test` objects
+are now pinned and marked as `!Unpin`.
+
+### Pinning to the heap
 
 _TODO_
 
