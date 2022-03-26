@@ -510,11 +510,8 @@ trait Stream {
 ```
 
 The `poll_next` function returns `Poll::Pending` when the stream is waiting.
-When values are ready, it returns `Poll::Ready(Some(T))` until there are values
-to return, and `Poll::Ready(None)` when values are finished processing.
+When values are ready, it returns `Poll::Ready(Some(T))`, and
+`Poll::Ready(None)` when the stream is finished.
 
-_TODO_ example of `try_next` and concurrent
-
-## Multiple futures
-
-_TODO_ `join!` and `select!`
+The `futures` crate has tools for both synchronous and asynchronous processing
+of yielded values.
