@@ -496,4 +496,25 @@ that it points to the correct location.
 
 ## Streams
 
-_TODO_
+The `Stream` trait is basically `Future` that yields multiple values:
+
+```rust
+use std::pin::Pin;
+use std::task::{Context, Poll};
+
+trait Stream {
+    type Item;
+    fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>)
+        -> Poll<Option<Self::Item>>;
+}
+```
+
+The `poll_next` function returns `Poll::Pending` when the stream is waiting.
+When values are ready, it returns `Poll::Ready(Some(T))` until there are values
+to return, and `Poll::Ready(None)` when values are finished processing.
+
+_TODO_ example of `try_next` and concurrent
+
+## Multiple futures
+
+_TODO_ `join!` and `select!`
