@@ -448,7 +448,51 @@ are now pinned and marked as `!Unpin`.
 
 ### Pinning to the heap
 
-_TODO_
+The `Box::pin` function can be used to pin objects to the heap:
+
+```rust
+use std::marker::PhantomPinned;
+use std::pin::Pin;
+
+struct Test {
+    text: String,
+    ptr: *const String,
+    _pin: PhantomPinned,
+}
+
+impl Test {
+    fn new(text: &str) -> Pin<Box<Self>> {
+        let mut s = Self {
+            text: text.to_string(),
+            ptr: std::ptr::null(),
+            _pin: PhantomPinned,
+        };
+        let mut boxed = Box::pin(s);
+        unsafe { boxed.as_mut().get_unchecked_mut().ptr = &boxed.as_ref().text as *const String };
+        boxed
+    }
+
+    fn text(self: Pin<&Self>) -> &str {
+        &self.get_ref().text
+    }
+
+    fn ptr(self: Pin<&Self>) -> &str {
+        unsafe { &*(self.ptr) }
+    }
+}
+
+fn main() {
+    let mut test1 = Test::new("test1");
+    let mut test2 = Test::new("test2");
+
+    println!("{}, {}", test1.as_ref().text(), test1.as_ref().ptr());
+    // std::mem::swap(test1.get_mut(), test2.get_mut()); // compilation error 🙀
+    println!("{}, {}", test2.as_ref().text(), test2.as_ref().ptr());
+}
+```
+
+The `ptr` field has to be populated _after_ the object is _boxed and pinned_, so
+that it points to the correct location.
 
 ## Streams
 
