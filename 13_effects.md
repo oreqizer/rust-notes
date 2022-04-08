@@ -62,6 +62,17 @@ fn read_username_from_file() -> Result<String, io::Error> {
 }
 ```
 
+An easy way to convert `Option<T>` to `Result<T, E>` is using the `.ok_or(E)` or
+`.ok_or_else(FnOnce() -> E)` function:
+
+```rust
+fn read_username() -> Result<String, String> {
+    let username = Some("kekega".to_string());
+
+    username.ok_or("Failed to read username".to_string())
+}
+```
+
 ## Operator `?`
 
 The `?` operator can be used with both `Option` and `Result` when calling
